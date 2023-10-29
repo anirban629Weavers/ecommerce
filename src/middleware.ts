@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const isPublicPath = path === "/login" || path === "signup";
+  const isPublicPath = path === "/login" || path === "/signup";
   const refreshToken = req.cookies.get("refreshToken")?.value || "";
 
   if (isPublicPath && refreshToken) {
