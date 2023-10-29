@@ -1,3 +1,8 @@
+import {
+  LOGIN_USER_URL,
+  SIGNUP_USER_URL,
+  SIGNOUT_USER_URL,
+} from "@/configs/url.config";
 import { counterState } from "@/interfaces/redux.interface";
 import { IUser_CLIENT, IUser_Login } from "@/interfaces/user.interface";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -16,7 +21,7 @@ const initialState: counterState = {
 export const loginUser = createAsyncThunk(
   "users/login-user",
   async (userData: IUser_Login, thunkAPI) => {
-    const { data } = await axios.post("/api/auth/login", userData, {
+    const { data } = await axios.post(LOGIN_USER_URL, userData, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -32,7 +37,7 @@ export const loginUser = createAsyncThunk(
 export const signupUser = createAsyncThunk(
   "users/signup-user",
   async (userData: IUser_CLIENT, thunkAPI) => {
-    const { data } = await axios.post("/api/auth/signup", userData, {
+    const { data } = await axios.post(SIGNUP_USER_URL, userData, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -45,10 +50,11 @@ export const signupUser = createAsyncThunk(
     }
   }
 );
+
 export const signoutUser = createAsyncThunk(
   "users/signout-user",
   async (_, thunkAPI) => {
-    const { data } = await axios.get("/api/auth/signout", {
+    const { data } = await axios.get(SIGNOUT_USER_URL, {
       headers: {
         "Content-Type": "application/json",
       },
