@@ -3,12 +3,12 @@ import {
   SIGNUP_USER_URL,
   SIGNOUT_USER_URL,
 } from "@/configs/url.config";
-import { counterState } from "@/interfaces/redux.interface";
+import { ICounterState } from "@/interfaces/redux.interface";
 import { IUser_CLIENT, IUser_Login } from "@/interfaces/user.interface";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState: counterState = {
+const initialState: ICounterState = {
   success: false,
   loading: false,
   userInfo: undefined,
@@ -77,6 +77,10 @@ export const userSlice = createSlice({
       state.error = undefined;
       state.success = false;
     },
+    updateTokens: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -125,5 +129,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { resetState } = userSlice.actions;
+export const { resetState, updateTokens } = userSlice.actions;
 export default userSlice.reducer;

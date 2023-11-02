@@ -1,6 +1,6 @@
 import { IUser_DB } from "./user.interface";
 
-export interface counterState {
+export interface ICounterState {
   message: string | undefined;
   error: string | undefined;
   loading: boolean;

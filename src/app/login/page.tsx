@@ -1,6 +1,6 @@
 "use client";
 import TriangleLoader from "@/helpers/TriangleLoader";
-import { counterState } from "@/interfaces/redux.interface";
+import { ICounterState } from "@/interfaces/redux.interface";
 import { IUser_Login } from "@/interfaces/user.interface";
 import { loginUser, resetState } from "@/redux/slices/userSlice";
 import { errorOptions, successOptions } from "@/utils/alerts";
@@ -26,7 +26,7 @@ const Login = () => {
     success,
     refreshToken,
     userInfo,
-  }: counterState = useSelector((state: any) => state.user);
+  }: ICounterState = useSelector((state: any) => state.user);
 
   const loginSubmitHandler = (values: IUser_Login) => {
     dispatch(loginUser(values));
@@ -47,7 +47,6 @@ const Login = () => {
   return (
     <section className="vh-75 gradient-custom py-5">
       {loading && <TriangleLoader />}
-      <ToastContainer />
       <div className="container py-5 h-100">
         <div className="row justify-content-center align-items-center h-100">
           <div className="col-12 col-lg-9 col-xl-7">

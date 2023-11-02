@@ -6,6 +6,7 @@ import Script from "next/script";
 import StoreProvider from "@/redux/StoreProvider";
 import "react-toastify/dist/ReactToastify.css";
 import TokenValidator from "@/interceptor/TokenValidator";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <StoreProvider>
           <TokenValidator>
+            <ToastContainer />
             <Header />
             {children}
             <Footer />

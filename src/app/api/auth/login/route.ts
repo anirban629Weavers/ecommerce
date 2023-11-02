@@ -1,9 +1,9 @@
 import connectDB from "@/db";
 import { IUser_Login } from "@/interfaces/user.interface";
 import User from "@/models/user.model";
-import { generateJwtToken } from "@/utils/generateToken";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { generateAccessToken, generateRefreshToken } from "../../utils/jwt";
 
 export const POST = async (req: NextRequest) => {
   const cookie = cookies();
@@ -14,25 +14,13 @@ export const POST = async (req: NextRequest) => {
     const user = await User.findOne({ email });
     if (user) {
       if (await user.matchPassword(password)) {
-        const accessToken = generateJwtToken(
-          { id: user._id },
-          process.env.ACCESS_TOKEN_SECRET_KEY as string,
-          // "5m"
-          "5000"
-        );
-        console.log(accessToken);
-        const refreshToken = generateJwtToken(
-          {
-            id: user._id,
-            email: user.email,
-            firstname: user.firstname,
-            lastname: user.lastname,
-          },
-          process.env.REFRESH_TOKEN_SECRET_KEY as string,
-          // "3d"
-          "10000"
-        );
-        console.log(refreshToken);
+        const accessToken = generateAccessToken({ id: user._id });
+        const refreshToken = generateRefreshToken({
+          id: user._id,
+          email: user.email,
+          firstname: user.firstname,
+          lastname: user.lastname,
+        });
         cookie.set({
           name: "accessToken",
           value: accessToken,
