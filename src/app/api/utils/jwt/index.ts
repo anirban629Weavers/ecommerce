@@ -27,8 +27,8 @@ const generateAccessToken = (payload: object) => {
   return generateJwtToken(
     payload,
     process.env.ACCESS_TOKEN_SECRET_KEY as string,
-    "10000"
-    // accessTokenDuration.toString()
+    // "10000"
+    accessTokenDuration.toString()
   );
 };
 
@@ -36,8 +36,8 @@ const generateRefreshToken = (payload: object) => {
   return generateJwtToken(
     payload,
     process.env.REFRESH_TOKEN_SECRET_KEY as string,
-    "60000"
-    // refreshTokenDuration.toString()
+    // "60000"
+    refreshTokenDuration.toString()
   );
 };
 

@@ -1,33 +1,36 @@
+"use client";
+
 import ShowProduct from "@/helpers/ShowProduct";
-import { IProduct_CLIENT } from "@/interfaces/product.interface";
-import Image from "next/image";
-import React from "react";
+import TriangleLoader from "@/helpers/TriangleLoader";
+import { IProduct_DB } from "@/interfaces/product.interface";
+import { ICounterState_Product } from "@/interfaces/redux.interface";
+import { resetState } from "@/redux/slices/orderSlice";
+import { getAllProducts } from "@/redux/slices/productSlice";
+import Link from "next/link";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductSection = () => {
-  const pageProduct: Array<IProduct_CLIENT> = [
-    {
-      id: "1",
-      imageLink: "/images/product-1.png",
-      name: "Nordic Chair",
-      price: 50.0,
-      width: 310,
-    },
-    {
-      id: "2",
-      imageLink: "/images/product-2.png",
-      name: "Kruzo Aero Chair",
-      price: 78.0,
-      width: 310,
-    },
-    {
-      id: "3",
-      imageLink: "/images/product-3.png",
-      name: "Ergonomic Chair",
-      price: 43.0,
-      width: 310,
-    },
-  ];
-  return (
+  const dispatch: any = useDispatch();
+  const { loading, products }: ICounterState_Product = useSelector(
+    (state: any) => state.product
+  );
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+    dispatch(resetState());
+  }, [dispatch]);
+
+  let topThreeProducts: Array<IProduct_DB> = [];
+  if (products) {
+    for (let i = 0; i < 3; i++) {
+      topThreeProducts.push(products[i]);
+    }
+  } else {
+    topThreeProducts = [];
+  }
+
+    return (
     <div className="product-section">
       <div className="container">
         <div className="row">
@@ -40,14 +43,26 @@ const ProductSection = () => {
               velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
             </p>
             <p>
-              <a href="shop.html" className="btn">
+              <Link href="/shop" className="btn">
                 Explore
-              </a>
+              </Link>
             </p>
           </div>
-          {pageProduct.map((product: IProduct_CLIENT) => (
-            <ShowProduct productData={product} key={product.id} />
-          ))}
+          {(loading && (
+              <div className="col-12 col-md-4 col-lg-9 mb-5">
+                <TriangleLoader />
+              </div>
+            ) &&
+            !topThreeProducts) ||
+          topThreeProducts.length === 0 ? (
+            <div className="col-12 col-md-4 col-lg-9 mb-5 text-center">
+              Some Unexpected Error Occurred
+            </div>
+          ) : (
+            topThreeProducts.map((product: IProduct_DB) => (
+              <ShowProduct productData={product} key={product._id} />
+            ))
+          )}
         </div>
       </div>
     </div>

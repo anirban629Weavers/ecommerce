@@ -63,7 +63,6 @@ const TokenValidator = ({ children }: { children: ReactNode }) => {
             await refreshAccessToken();
           }
           if ((err.response.status as number) === 403) {
-            console.log("triggered");
             dispatch(signoutUser());
           }
         }

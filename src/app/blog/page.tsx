@@ -10,13 +10,6 @@ const Blog = () => {
     <>
       <SubHeader headerName="Blog" />
       <div className="blog-section">
-        <button
-          onClick={() => {
-            toast.success("ASdasdasd", successOptions);
-          }}
-        >
-          asdasdasdas
-        </button>
         <ToastContainer />
         <div className="container">
           <div className="row">

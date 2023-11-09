@@ -1,135 +1,53 @@
+"use client";
+import CartItem from "@/components/CartItem";
+import { ICounterState_Order } from "@/interfaces/redux.interface";
+import { loadCartItems_local } from "@/redux/slices/orderSlice";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
+  const dispatch: any = useDispatch();
+  const { cartItems }: ICounterState_Order = useSelector(
+    (state: any) => state.order
+  );
+
+  useEffect(() => {
+    dispatch(loadCartItems_local());
+  }, [dispatch]);
+
   return (
     <div className="untree_co-section before-footer-section">
       <div className="container">
-        <div className="row mb-5">
-          <form className="col-md-12" method="post">
-            <div className="site-blocks-table">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th className="product-thumbnail">Image</th>
-                    <th className="product-name">Product</th>
-                    <th className="product-price">Price</th>
-                    <th className="product-quantity">Quantity</th>
-                    <th className="product-total">Total</th>
-                    <th className="product-remove">Remove</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="product-thumbnail">
-                      <Image
-                        src="/images/product-1.png"
-                        alt="Image"
-                        className="img-fluid"
-                        width={1000}
-                        height={1000}
-                      />
-                    </td>
-                    <td className="product-name">
-                      <h2 className="h5 text-black">Product 1</h2>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                      <div
-                        className="input-group mb-3 d-flex align-items-center quantity-container"
-                        style={{ maxWidth: "120px" }}
-                      >
-                        <div className="input-group-prepend">
-                          <button
-                            className="btn btn-outline-black decrease"
-                            type="button"
-                          >
-                            &minus;
-                          </button>
-                        </div>
-                        <input
-                          type="text"
-                          className="form-control text-center quantity-amount"
-                          value="1"
-                          placeholder=""
-                          aria-label="Example text with button addon"
-                          aria-describedby="button-addon1"
-                        />
-                        <div className="input-group-append">
-                          <button
-                            className="btn btn-outline-black increase "
-                            type="button"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                      <a href="#" className="btn btn-black btn-sm">
-                        X
-                      </a>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className="product-thumbnail">
-                      <Image
-                        src="/images/product-2.png"
-                        alt="Image"
-                        className="img-fluid"
-                        width={1000}
-                        height={1000}
-                      />
-                    </td>
-                    <td className="product-name">
-                      <h2 className="h5 text-black">Product 2</h2>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                      <div
-                        className="input-group mb-3 d-flex align-items-center quantity-container"
-                        style={{ maxWidth: "120px" }}
-                      >
-                        <div className="input-group-prepend">
-                          <button
-                            className="btn btn-outline-black decrease"
-                            type="button"
-                          >
-                            &minus;
-                          </button>
-                        </div>
-                        <input
-                          type="text"
-                          className="form-control text-center quantity-amount"
-                          value="1"
-                          placeholder=""
-                          aria-label="Example text with button addon"
-                          aria-describedby="button-addon1"
-                        />
-                        <div className="input-group-append">
-                          <button
-                            className="btn btn-outline-black increase"
-                            type="button"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                      <a href="#" className="btn btn-black btn-sm">
-                        X
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </form>
-        </div>
+        {cartItems.length === 0 ? (
+          <p className="text-center">
+            <strong>Your Cart is Empty</strong>
+          </p>
+        ) : (
+          <div className="row mb-5">
+            <form className="col-md-12" method="post">
+              <div className="site-blocks-table">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th className="product-thumbnail">Image</th>
+                      <th className="product-name">Product</th>
+                      <th className="product-price">Price</th>
+                      <th className="product-quantity">Quantity</th>
+                      <th className="product-total">Total</th>
+                      <th className="product-remove">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cartItems.map((cartItem) => (
+                      <CartItem key={cartItem.productId} />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </div>
+        )}
 
         <div className="row">
           <div className="col-md-6">

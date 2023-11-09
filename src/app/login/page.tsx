@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const dispatch: any = useDispatch();

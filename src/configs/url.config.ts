@@ -8,3 +8,6 @@ export const REFRESH_TOKEN_URL = "/api/auth/session/refresh";
 
 // BASE URL
 export const BASE_URL = "http://localhost:3000";
+
+// PRODUCT URL
+export const GET_ALL_PRODUCTS = "/api/products/all";

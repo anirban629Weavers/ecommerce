@@ -1,9 +1,9 @@
 import connectDB from "@/db";
-import { IUser, IUser_DB } from "@/interfaces/user.interface";
+import { IUser } from "@/interfaces/user.interface";
 import User from "@/models/user.model";
-import { generateJwtToken } from "@/utils/generateToken";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { generateAccessToken, generateRefreshToken } from "../../utils/jwt";
 
 export const POST = async (req: NextRequest) => {
   const cookie = cookies();
@@ -15,21 +15,13 @@ export const POST = async (req: NextRequest) => {
     if (isUser) throw new Error("User Already exists");
     const user = await User.create(userData);
     if (user) {
-      const accessToken = generateJwtToken(
-        { id: user._id },
-        process.env.ACCESS_TOKEN_SECRET_KEY as string,
-        "3m"
-      );
-      const refreshToken = generateJwtToken(
-        {
-          id: user._id,
-          email: user.email,
-          firstname: user.firstname,
-          lastname: user.lastname,
-        },
-        process.env.REFRESH_TOKEN_SECRET_KEY as string,
-        "3d"
-      );
+      const accessToken = generateAccessToken({ id: user._id });
+      const refreshToken = generateRefreshToken({
+        id: user._id,
+        email: user.email,
+        firstname: user.firstname,
+        lastname: user.lastname,
+      });
       cookie.set({
         name: "accessToken",
         value: accessToken,

@@ -31,6 +31,7 @@ export default function RootLayout({
             <Footer />
           </TokenValidator>
         </StoreProvider>
+
         <script src="js/bootstrap.bundle.min.js" async />
         <script src="js/tiny-slider.js" async />
         <Script src="js/custom.js" />

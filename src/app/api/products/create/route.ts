@@ -1,28 +1,45 @@
+import { NextRequest, NextResponse } from "next/server";
 import { IProduct } from "@/interfaces/product.interface";
+import Product from "@/models/product.model";
+import connectDB from "@/db";
 
-export const productData: Array<IProduct> = [
-  {
-    "imageUrl": "https://source.unsplash.com/400x300/?interior",
-    "name": "Modern Sofa",
-    "price": 499.99,
-    "description": "A sleek and comfortable sofa for your modern living room.",
-    "inStock": 10,
-    "category": "Living Room",
-    "reviews": [
-      {
-        "user": "user123",
-        "comment": "Beautiful dining table design. Adds elegance to the room."
-      },
-      {
-        "user": "user456",
-        "comment": "Sturdy construction. Easy to assemble."
-      },
-      {
-        "user": "user789",
-        "comment":
-          "Great value for the price. Highly satisfied with the purchase."      }
-    ]
-  },
+export const POST = async (req: NextRequest) => {
+  const productData: IProduct = await req.json();
+  try {
+    await connectDB();
+    const existingProduct = await Product.findOne({
+      name: productData.name,
+      description: productData.description,
+      category: productData.category,
+    });
+    if (existingProduct) throw new Error("Product Already Exists");
+    else {
+      const newProduct = await Product.create(productData);
+      if (newProduct) {
+        return NextResponse.json(
+          {
+            success: true,
+            message: "Product Added Successfully",
+            product: newProduct,
+          },
+          {
+            status: 200,
+          }
+        );
+      } else {
+        throw new Error("Failed to add the Product");
+      }
+    }
+  } catch (error: any) {
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 404 }
+    );
+  }
+};
+/**
+ * 
+ * 
   {
     "imageUrl": "https://source.unsplash.com/400x300/?interior",
     "name": "Elegant Dining Table",
@@ -441,87 +458,5 @@ export const productData: Array<IProduct> = [
         "comment":
           "Great value for the price. Highly satisfied with the purchase."      }
     ]
-  },
-];
-
-
-
-
-const dummy = [
-  {
-    "imageUrl": "/images/product-3.png",
-    "name": "Ergonomic Chair",
-"price": 43.0,
-    "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed semper lorem. Proin commodo, turpis a aliquet eleifend, nisl neque bibendum lorem, sed luctus enim ex eget elit.",
-    "inStock": 10,
-    "category": "Furniture",
-  },
-  {
-    "imageUrl": "/images/product-1.png",
-    "name": "Nordic Chair",
-"price": 50.0,
-    "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed semper lorem. Proin commodo, turpis a aliquet eleifend, nisl neque bibendum lorem, sed luctus enim ex eget elit.",
-    "inStock": 5,
-    "category": "Furniture",
-  },
-  {
-    "imageUrl": "/images/product-2.png",
-    "name": "Kruzo Aero Chair",
-"price": 78.0,
-    "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed semper lorem. Proin commodo, turpis a aliquet eleifend, nisl neque bibendum lorem, sed luctus enim ex eget elit.",
-    "inStock": 2,
-    "category": "Furniture",
-  },
-  {
-    "imageUrl":
-      "https://cdn.godrej.com/img/637355301598511641_Sofas-and-Recliners-Godrej-Interio-Cat.jpg",
-    "name": "Ergonomic Chair",
-"price": 43.0,
-    "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed semper lorem. Proin commodo, turpis a aliquet eleifend, nisl neque bibendum lorem, sed luctus enim ex eget elit.",
-    "inStock": 8,
-    "category": "Furniture",
-  },
-  {
-    "imageUrl":
-      "https://cdn.godrej.com/img/637355344845360489_Accessories-Godrej-Interio-Cat.jpg",
-    "name": "Nordic Chair",
-"price": 50.0,
-    "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed semper lorem. Proin commodo, turpis a aliquet eleifend, nisl neque bibendum lorem, sed luctus enim ex eget elit.",
-    "inStock": 3,
-    "category": "Furniture",
-  },
-  {
-    "imageUrl": "https://source.unsplash.com/400x300/?chair",
-    "name": "Nordic Chair",
-"price": 50.0,
-    "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed semper lorem. Proin commodo, turpis a aliquet eleifend, nisl neque bibendum lorem, sed luctus enim ex eget elit.",
-    "inStock": 6,
-    "category": "Furniture",
-  },
-  {
-    "imageUrl":
-      "https://cdn.godrej.com/img/637355337825008415_Bean-Bags-and-Pouffes-Godrej-Interio-cat.jpg",
-    "name": "Kruzo Aero Chair",
-"price": 78.0,
-    "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed semper lorem. Proin commodo, turpis a aliquet eleifend, nisl neque bibendum lorem, sed luctus enim ex eget elit.",
-    "inStock": 12,
-    "category": "Furniture",
-  },
-  {
-    "imageUrl":
-      "https://cdn.godrej.com/img/637357024573576438_dining-godrej-interio-cat.jpg",
-    "name": "Ergonomic Chair",
-"price": 43.0,
-    "description":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed semper lorem. Proin commodo, turpis a aliquet eleifend, nisl neque bibendum lorem, sed luctus enim ex eget elit.",
-    "inStock": 0,
-    "category": "Furniture",
-  },
-];
+  }
+ */

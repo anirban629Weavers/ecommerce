@@ -1,9 +1,13 @@
 "use client";
 import { BrandHeading } from "@/helpers";
-import { counterState } from "@/interfaces/redux.interface";
+import CartIcon from "@/helpers/CartIcon";
+import {
+  ICounterState,
+  ICounterState_Order,
+} from "@/interfaces/redux.interface";
 import { IUser_DB } from "@/interfaces/user.interface";
 import { signoutUser } from "@/redux/slices/userSlice";
-import Image from "next/image";
+import { cartQuantity } from "@/redux/slices/orderSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -12,9 +16,17 @@ import { useDispatch, useSelector } from "react-redux";
 const Header = () => {
   const dispatch: any = useDispatch();
   const pathname = usePathname().split("/")[1];
-  const { userInfo, refreshToken }: counterState = useSelector(
-    (state: any) => state.user
+  const { userInfo }: ICounterState = useSelector((state: any) => state.user);
+  const { cartItemsQuantity }: ICounterState_Order = useSelector(
+    (state: any) => state.order
   );
+
+  const [cartCount, setCartCount] = useState(cartItemsQuantity);
+
+  useEffect(() => {
+    dispatch(cartQuantity());
+    setCartCount(cartItemsQuantity);
+  }, [cartItemsQuantity, dispatch]);
 
   return (
     <>
@@ -78,14 +90,15 @@ const Header = () => {
                   </span>
                 </li>
                 <li>
-                  <Link className="nav-link me-4 active" href="/">
+                  <Link className="nav-link me-4 active" href="/cart">
                     <span className="me-2">Cart</span>
-                    <Image
+
+                    {/* <Image
                       src="images/cart.svg"
                       alt=""
                       width={20}
                       height={20}
-                    />
+                    /> */}
                   </Link>
                 </li>
                 <li
@@ -112,12 +125,13 @@ const Header = () => {
                 </li>
                 <li>
                   <Link className="ms-4 nav-link" href="/cart">
-                    <Image
+                    <CartIcon count={cartCount.toString()} />
+                    {/* <Image
                       src="images/cart.svg"
                       alt=""
                       width={20}
                       height={20}
-                    />
+                    /> */}
                   </Link>
                 </li>
               </ul>
