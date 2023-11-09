@@ -37,6 +37,7 @@ const addToCart = (productData: IProduct_DB) => {
       item.quantity++;
     }
   });
+
   if (existing) {
     localStorage.setItem("cartItems", JSON.stringify(existingItems));
   } else {
@@ -44,6 +45,7 @@ const addToCart = (productData: IProduct_DB) => {
     const cartItem: ICartItem = {
       productId: productData._id,
       quantity: 1,
+      productData: productData,
     };
     const updatedItems = [...existingItems, cartItem];
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));

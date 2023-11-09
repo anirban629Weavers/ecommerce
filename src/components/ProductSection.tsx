@@ -22,7 +22,7 @@ const ProductSection = () => {
   }, [dispatch]);
 
   let topThreeProducts: Array<IProduct_DB> = [];
-  if (products) {
+  if (products.length != 0) {
     for (let i = 0; i < 3; i++) {
       topThreeProducts.push(products[i]);
     }
@@ -30,7 +30,7 @@ const ProductSection = () => {
     topThreeProducts = [];
   }
 
-    return (
+  return (
     <div className="product-section">
       <div className="container">
         <div className="row">
@@ -48,13 +48,12 @@ const ProductSection = () => {
               </Link>
             </p>
           </div>
-          {(loading && (
-              <div className="col-12 col-md-4 col-lg-9 mb-5">
-                <TriangleLoader />
-              </div>
-            ) &&
-            !topThreeProducts) ||
-          topThreeProducts.length === 0 ? (
+          {loading && (
+            <div className="col-12 col-md-4 col-lg-9 mb-5">
+              <TriangleLoader />
+            </div>
+          )}
+          {topThreeProducts.length === 0 ? (
             <div className="col-12 col-md-4 col-lg-9 mb-5 text-center">
               Some Unexpected Error Occurred
             </div>

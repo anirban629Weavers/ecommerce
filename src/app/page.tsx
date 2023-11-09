@@ -10,9 +10,8 @@ import {
 import React from "react";
 
 const Page = () => {
-  // const dispatch: any = useDispatch();
-  // dispatch(resetState());
-
+  
+  
   return (
     <>
       <HeroSection />

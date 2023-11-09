@@ -14,12 +14,7 @@ const ShowProduct = ({
   productData: IProduct_DB;
   width?: number;
 }) => {
-  // const { userInfo }: ICounterState = useSelector((state: any) => state.user);
-
   const dispatch: any = useDispatch();
-  // useEffect(() => {
-  //   // const addToCartHandler = () =>
-  // }, [dispatch, productData]);
 
   const { imageUrl, name, price, rating } = productData;
   return (

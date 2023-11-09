@@ -40,7 +40,11 @@ const Cart = () => {
                   </thead>
                   <tbody>
                     {cartItems.map((cartItem) => (
-                      <CartItem key={cartItem.productId} />
+                      <CartItem
+                        key={cartItem.productId}
+                        productData={cartItem.productData}
+                        quantity={cartItem.quantity}
+                      />
                     ))}
                   </tbody>
                 </table>
