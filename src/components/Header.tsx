@@ -21,11 +21,8 @@ const Header = () => {
     (state: any) => state.order
   );
 
-  const [cartCount, setCartCount] = useState(cartItemsQuantity);
-
   useEffect(() => {
     dispatch(cartQuantity());
-    setCartCount(cartItemsQuantity);
   }, [cartItemsQuantity, dispatch]);
 
   return (
@@ -91,7 +88,8 @@ const Header = () => {
                 </li>
                 <li>
                   <Link className="nav-link me-4 active" href="/cart">
-                    <span className="me-2">Cart</span>
+                    {/* <span className="me-2">Cart</span> */}
+                    <CartIcon count={cartItemsQuantity.toString()} />
 
                     {/* <Image
                       src="images/cart.svg"
@@ -125,7 +123,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link className="ms-4 nav-link" href="/cart">
-                    <CartIcon count={cartCount.toString()} />
+                    <CartIcon count={cartItemsQuantity.toString()} />
                     {/* <Image
                       src="images/cart.svg"
                       alt=""

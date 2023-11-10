@@ -3,7 +3,7 @@ import CartItem from "@/components/CartItem";
 import { ICounterState_Order } from "@/interfaces/redux.interface";
 import { loadCartItems_local } from "@/redux/slices/orderSlice";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
@@ -11,6 +11,10 @@ const Cart = () => {
   const { cartItems }: ICounterState_Order = useSelector(
     (state: any) => state.order
   );
+
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
+  const [subtotal, setSubTotal] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     dispatch(loadCartItems_local());
@@ -20,7 +24,7 @@ const Cart = () => {
     <div className="untree_co-section before-footer-section">
       <div className="container">
         {cartItems.length === 0 ? (
-          <p className="text-center">
+          <p className="text-center" style={{ margin: "7%" }}>
             <strong>Your Cart is Empty</strong>
           </p>
         ) : (
@@ -39,13 +43,15 @@ const Cart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartItems.map((cartItem) => (
-                      <CartItem
-                        key={cartItem.productId}
-                        productData={cartItem.productData}
-                        quantity={cartItem.quantity}
-                      />
-                    ))}
+                    {cartItems.map((cartItem) => {
+                      return (
+                        <CartItem
+                          key={cartItem.productId}
+                          productData={cartItem.productData}
+                          quantity={cartItem.quantity}
+                        />
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -102,7 +108,19 @@ const Cart = () => {
                     <span className="text-black">Subtotal</span>
                   </div>
                   <div className="col-md-6 text-right">
-                    <strong className="text-black">$230.00</strong>
+                    <strong className="text-black">
+                      &#8377;{subtotal.toPrecision(5)}
+                    </strong>
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-md-6">
+                    <span className="text-black">Delivery Charges</span>
+                  </div>
+                  <div className="col-md-6 text-right">
+                    <strong className="text-black">
+                      &#8377;{deliveryCharge.toPrecision(3)}
+                    </strong>
                   </div>
                 </div>
                 <div className="row mb-5">
@@ -110,10 +128,11 @@ const Cart = () => {
                     <span className="text-black">Total</span>
                   </div>
                   <div className="col-md-6 text-right">
-                    <strong className="text-black">$230.00</strong>
+                    <strong className="text-black">
+                      &#8377;{total.toPrecision(5)}
+                    </strong>
                   </div>
                 </div>
-
                 <div className="row">
                   <div className="col-md-12">
                     <button className="btn btn-black btn-lg py-3 btn-block">

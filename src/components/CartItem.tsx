@@ -1,6 +1,9 @@
+"use client";
 import { IProduct_DB } from "@/interfaces/product.interface";
+import { addToCart_local } from "@/redux/slices/orderSlice";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const CartItem = ({
   productData,
@@ -9,6 +12,17 @@ const CartItem = ({
   productData: IProduct_DB;
   quantity: number;
 }) => {
+  const dispatch: any = useDispatch();
+  const [itemCount, setItemCount] = useState(quantity);
+  const [addToCartTriggered, setAddToCartTriggered] = useState(false);
+
+  const addToCartHandler = () => dispatch(addToCart_local(productData));
+  if (addToCartTriggered) {
+    addToCartHandler();
+    setItemCount(itemCount + 1);
+    setAddToCartTriggered(false);
+  }
+
   return (
     <tr>
       <td className="product-thumbnail">
@@ -34,22 +48,26 @@ const CartItem = ({
               &minus;
             </button>
           </div>
-          <input
-            type="text"
-            className="form-control text-center quantity-amount"
-            value="1"
+          <span
+            className="border px-2 border-secondary text-center quantity-amount"
             placeholder=""
-            aria-label="Example text with button addon"
-            aria-describedby="button-addon1"
-          />
+          >
+            {itemCount < 10 ? `0${itemCount}` : itemCount}
+          </span>
           <div className="input-group-append">
-            <button className="btn btn-outline-black increase" type="button">
+            <button
+              className="btn btn-outline-black increase"
+              type="button"
+              onClick={() => {
+                setAddToCartTriggered(true);
+              }}
+            >
               +
             </button>
           </div>
         </div>
       </td>
-      <td>${productData.price * quantity}</td>
+      <td>&#8377; {(productData.price * quantity).toPrecision(5)}</td>
       <td>
         <a href="#" className="btn btn-black btn-sm">
           X

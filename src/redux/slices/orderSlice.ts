@@ -77,6 +77,12 @@ export const orderSlice = createSlice({
     addToCart_local: (state, action) => {
       const productData: IProduct_DB = action.payload;
       addToCart(productData);
+      state.cartItems.forEach((item) => {
+        if (item.productId === productData._id) {
+          item.quantity++;
+        }
+      });
+      state.cartItemsQuantity++;
     },
     loadCartItems_local: (state) => {
       const products: Array<ICartItem> = cartItems();
