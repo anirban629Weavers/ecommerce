@@ -3,11 +3,11 @@ import { BrandHeading } from "@/helpers";
 import CartIcon from "@/helpers/CartIcon";
 import {
   ICounterState,
-  ICounterState_Order,
+  ICounterState_Cart,
 } from "@/interfaces/redux.interface";
 import { IUser_DB } from "@/interfaces/user.interface";
 import { signoutUser } from "@/redux/slices/userSlice";
-import { cartQuantity } from "@/redux/slices/orderSlice";
+import { cartQuantity } from "@/redux/slices/cartSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -17,8 +17,8 @@ const Header = () => {
   const dispatch: any = useDispatch();
   const pathname = usePathname().split("/")[1];
   const { userInfo }: ICounterState = useSelector((state: any) => state.user);
-  const { cartItemsQuantity }: ICounterState_Order = useSelector(
-    (state: any) => state.order
+  const { cartItemsQuantity }: ICounterState_Cart = useSelector(
+    (state: any) => state.cart
   );
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <>
       <nav
-        className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark"
+        className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark sticky-top "
         arial-label="Furni navigation bar"
       >
         <div className="container">

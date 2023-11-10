@@ -38,10 +38,8 @@ const Login = () => {
       userInfo &&
       refreshToken &&
       toast.success(message, successOptions) &&
-      setTimeout(() => {
-        dispatch(resetState());
-        router.push("/");
-      }, 1500);
+      dispatch(resetState()) &&
+      router.push("/");
   }, [dispatch, error, message, router, success, refreshToken, userInfo]);
 
   return (

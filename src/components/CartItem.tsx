@@ -1,8 +1,12 @@
 "use client";
 import { IProduct_DB } from "@/interfaces/product.interface";
-import { addToCart_local } from "@/redux/slices/orderSlice";
+import {
+  addToCart_local,
+  removeItem,
+  removeSingleFromCart_local,
+} from "@/redux/slices/cartSlice";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 const CartItem = ({
@@ -15,12 +19,44 @@ const CartItem = ({
   const dispatch: any = useDispatch();
   const [itemCount, setItemCount] = useState(quantity);
   const [addToCartTriggered, setAddToCartTriggered] = useState(false);
+  const [removeSingleFromCartTriggered, setRemoveSingleFromCartTriggered] =
+    useState(false);
+  const [removeItemFromCartTriggered, setRemoveItemFromCartTriggered] =
+    useState(false);
 
   const addToCartHandler = () => dispatch(addToCart_local(productData));
   if (addToCartTriggered) {
     addToCartHandler();
     setItemCount(itemCount + 1);
     setAddToCartTriggered(false);
+  }
+
+  const removeSingleFromCartHandler = () =>
+    dispatch(removeSingleFromCart_local(productData._id));
+  if (removeSingleFromCartTriggered) {
+    if (quantity === 1) {
+      dispatch(
+        removeItem({
+          id: productData._id,
+          quantity: 1,
+          price: productData.price,
+        })
+      );
+    } else {
+      removeSingleFromCartHandler();
+      setItemCount(itemCount - 1);
+      setRemoveSingleFromCartTriggered(false);
+    }
+  }
+
+  const removeItemFromCartHandler = () =>
+    dispatch(
+      removeItem({ id: productData._id, quantity, price: productData.price })
+    );
+  if (removeItemFromCartTriggered) {
+    removeItemFromCartHandler();
+    setItemCount(0);
+    setRemoveItemFromCartTriggered(false);
   }
 
   return (
@@ -44,7 +80,13 @@ const CartItem = ({
           style={{ maxWidth: "120px" }}
         >
           <div className="input-group-prepend">
-            <button className="btn btn-outline-black decrease" type="button">
+            <button
+              className="btn btn-outline-black decrease"
+              type="button"
+              onClick={() => {
+                setRemoveSingleFromCartTriggered(true);
+              }}
+            >
               &minus;
             </button>
           </div>
@@ -69,9 +111,14 @@ const CartItem = ({
       </td>
       <td>&#8377; {(productData.price * quantity).toPrecision(5)}</td>
       <td>
-        <a href="#" className="btn btn-black btn-sm">
-          X
-        </a>
+        <div
+          className="btn btn-black btn-sm"
+          onClick={() => {
+            setRemoveItemFromCartTriggered(true);
+          }}
+        >
+          <i className="fa-solid fa-trash-can fa-lg"></i>
+        </div>
       </td>
     </tr>
   );

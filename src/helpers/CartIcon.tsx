@@ -1,6 +1,6 @@
 "use client";
 import { ICounterState_Order } from "@/interfaces/redux.interface";
-import { cartQuantity } from "@/redux/slices/orderSlice";
+import { cartQuantity } from "@/redux/slices/cartSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

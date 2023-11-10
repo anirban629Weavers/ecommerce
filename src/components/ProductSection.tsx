@@ -4,7 +4,7 @@ import ShowProduct from "@/helpers/ShowProduct";
 import TriangleLoader from "@/helpers/TriangleLoader";
 import { IProduct_DB } from "@/interfaces/product.interface";
 import { ICounterState_Product } from "@/interfaces/redux.interface";
-import { resetState } from "@/redux/slices/orderSlice";
+import { resetState } from "@/redux/slices/cartSlice";
 import { getAllProducts } from "@/redux/slices/productSlice";
 import Link from "next/link";
 import React, { useEffect } from "react";

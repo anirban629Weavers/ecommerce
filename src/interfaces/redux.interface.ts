@@ -1,4 +1,4 @@
-import { ICartItem } from "./order.interface";
+import { ICartItem, IOrderData_DB } from "./order.interface";
 import { IProduct_DB } from "./product.interface";
 import { IUser_DB } from "./user.interface";
 
@@ -20,11 +20,20 @@ export interface ICounterState_Product {
   products: Array<IProduct_DB>;
 }
 
-export interface ICounterState_Order {
+export interface ICounterState_Cart {
   message: string | undefined;
   error: string | undefined;
   loading: boolean;
   success: boolean;
   cartItemsQuantity: number;
   cartItems: Array<ICartItem>;
+  totalAmount: number;
+}
+
+export interface ICounterState_Order {
+  message: string | undefined;
+  error: string | undefined;
+  loading: boolean;
+  success: boolean;
+  orderDetails: object | undefined | IOrderData_DB;
 }

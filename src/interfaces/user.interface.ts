@@ -38,3 +38,17 @@ export interface IUser_Login {
   email: string;
   password: string;
 }
+
+// export interface IUser_DB_BLANK {
+//   _id: "",
+//   firstname: "",
+//   lastname: "",
+//   email: "",
+//   password: "",
+//   phone: "",
+//   birthday: "",
+//   gender: "",
+//   createdAt: "",
+//   updatedAt: "",
+//   __v: "",
+// }

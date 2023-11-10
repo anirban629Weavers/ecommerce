@@ -9,6 +9,9 @@ export function middleware(req: NextRequest) {
 
   if (isPublicPath && refreshToken)
     return NextResponse.redirect(new URL("/", req.url));
+
+  if (path === "/invoice" && refreshToken === "")
+    return NextResponse.redirect(new URL("/login", req.url));
 }
 
 // const generalPaths = path === "/cart";

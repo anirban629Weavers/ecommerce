@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import Rating from "./Rating";
 import { useDispatch, useSelector } from "react-redux";
 import { ICounterState } from "@/interfaces/redux.interface";
-import { addToCart_local, cartQuantity } from "@/redux/slices/orderSlice";
+import { addToCart_local, cartQuantity } from "@/redux/slices/cartSlice";
 
 const ShowProduct = ({
   productData,
