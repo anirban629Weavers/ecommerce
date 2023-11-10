@@ -128,6 +128,16 @@ export const cartSlice = createSlice({
       const products: Array<ICartItem> = cartItems();
       state.cartItems = products;
     },
+    makeCartEmpty: (state) => {
+      localStorage.removeItem("cartItems");
+      state.success = false;
+      state.loading = false;
+      state.error = undefined;
+      state.message = undefined;
+      state.cartItemsQuantity = 0;
+      state.cartItems = [];
+      state.totalAmount = 0;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -139,5 +149,6 @@ export const {
   loadCartItems_local,
   removeSingleFromCart_local,
   removeItem,
+  makeCartEmpty,
 } = cartSlice.actions;
 export default cartSlice.reducer;

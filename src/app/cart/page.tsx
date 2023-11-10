@@ -1,5 +1,6 @@
 "use client";
 import CartItem from "@/components/CartItem";
+import TriangleLoader from "@/helpers/TriangleLoader";
 import {
   ICartItem_Order_Invoice,
   IOrderData,
@@ -17,6 +18,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import AddressButtonTemp from "./AddressButtonTemp";
 
 const Cart = () => {
   const dispatch: any = useDispatch();
@@ -24,10 +26,10 @@ const Cart = () => {
   const { cartItems, totalAmount }: ICounterState_Cart = useSelector(
     (state: any) => state.cart
   );
-
   const { refreshToken, userInfo }: ICounterState = useSelector(
     (state: any) => state.user
   );
+  const { loading }: ICounterState = useSelector((state: any) => state.order);
 
   const [total, setTotal] = useState(0);
 
@@ -64,8 +66,8 @@ const Cart = () => {
         orderItems,
         phone: phone,
         status: false,
-        subtotal: totalAmount,
-        total,
+        subtotal: Math.ceil(totalAmount),
+        total: Math.ceil(total),
       };
       dispatch(createOrder(orderDetails));
       router.push("/invoice");
@@ -74,6 +76,7 @@ const Cart = () => {
 
   return (
     <div className="untree_co-section before-footer-section">
+      {loading && <TriangleLoader />}
       <div className="container">
         {cartItems.length === 0 ? (
           <p className="text-center" style={{ margin: "7%" }}>
@@ -121,6 +124,9 @@ const Cart = () => {
                   >
                     Continue Shopping
                   </Link>
+                </div>
+                <div className="col-md-6">
+                  <AddressButtonTemp />
                 </div>
               </div>
               {userInfo && refreshToken && (

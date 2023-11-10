@@ -33,7 +33,7 @@ export interface IOrderData_DB {
   email: string;
   phone: string;
   status: boolean;
-  items: Array<ICartItem>;
+  orderItems: Array<ICartItem_Order_Invoice>;
   subtotal: number;
   deliverycharge: number;
   total: number;

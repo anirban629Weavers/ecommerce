@@ -7,8 +7,9 @@ import {
   ICounterState,
   ICounterState_Order,
 } from "@/interfaces/redux.interface";
+import { makeCartEmpty } from "@/redux/slices/cartSlice";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CustomerDetails = ({
@@ -80,45 +81,56 @@ const InvoiceDetails = ({
   );
 };
 
-const ItemDetails = () => {
+const ItemDetails = ({
+  no,
+  name,
+  qty,
+  unitPrice,
+  totalAmount,
+}: {
+  no?: string;
+  name: string;
+  qty: number;
+  unitPrice: number;
+  totalAmount: number;
+}) => {
   return (
-    <>
-      <tr>
-        <th scope="row">1</th>
-        <td>Pro Package</td>
-        <td>4</td>
-        <td>$200</td>
-        <td>$800</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Web hosting</td>
-        <td>1</td>
-        <td>$10</td>
-        <td>$10</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Consulting</td>
-        <td>1 year</td>
-        <td>$300</td>
-        <td>$300</td>
-      </tr>
-    </>
+    <tr>
+      <th scope="row">{no}1</th>
+      <td>{name}</td>
+      <td>{qty}</td>
+      <td>&#8377;{unitPrice}</td>
+      <td>&#8377;{totalAmount}</td>
+    </tr>
   );
 };
 
 const Invoice = () => {
   const dispatch: any = useDispatch();
   const router = useRouter();
+  dispatch(makeCartEmpty());
 
   const { orderDetails, loading }: ICounterState_Order = useSelector(
     (state: any) => state.order
   );
-  const currentOrder = orderDetails as IOrderData_DB;
+
+  const {
+    orderItems,
+    _id,
+    email,
+    customer,
+    createdAt,
+    status,
+    phone,
+    deliverycharge,
+    total,
+    subtotal,
+  } = orderDetails as IOrderData_DB;
+
   const { refreshToken, userInfo }: ICounterState = useSelector(
     (state: any) => state.user
   );
+
   useEffect(() => {
     !refreshToken && !userInfo && router.push("/login");
   }, [refreshToken, router, userInfo]);
@@ -131,7 +143,7 @@ const Invoice = () => {
           <div className="row d-flex align-items-baseline">
             <div className="col-xl-9">
               <p style={{ color: "#7e8d9f", fontSize: "20px" }}>
-                Invoice {">>"} <strong>ID: {currentOrder._id}</strong>
+                Invoice {">>"} <strong>ID: {_id}</strong>
               </p>
             </div>
             <div className="col-xl-3 float-end ">
@@ -159,19 +171,11 @@ const Invoice = () => {
 
             <div className="row">
               <div className="col-xl-8">
-                <CustomerDetails
-                  email={currentOrder.email}
-                  name={currentOrder.customer}
-                  phone={currentOrder.phone}
-                />
+                <CustomerDetails email={email} name={customer} phone={phone} />
               </div>
               <div className="col-xl-4">
                 <p className="text-muted">Invoice</p>
-                <InvoiceDetails
-                  date={currentOrder.createdAt}
-                  id={currentOrder._id}
-                  status={currentOrder.status}
-                />
+                <InvoiceDetails date={createdAt} id={_id} status={status} />
               </div>
             </div>
 
@@ -190,7 +194,15 @@ const Invoice = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <ItemDetails />
+                  {orderItems.map((item) => (
+                    <ItemDetails
+                      key={item.productId}
+                      name={item.productData.name}
+                      qty={item.quantity}
+                      totalAmount={item.productData.amount}
+                      unitPrice={item.productData.unitPrice}
+                    />
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -203,15 +215,17 @@ const Invoice = () => {
               <div className="col-xl-3">
                 <ul className="list-unstyled">
                   <li className="text-muted ms-3">
-                    <span className="text-black me-4">SubTotal</span>$1110
+                    <span className="text-black me-4">SubTotal</span>&#8377;
+                    {subtotal}
                   </li>
                   <li className="text-muted ms-3 mt-2">
-                    <span className="text-black me-4">Tax(15%)</span>$111
+                    <span className="text-black me-4">Delivery </span>
+                    &#8377;{deliverycharge}
                   </li>
                 </ul>
                 <p className="text-black float-start">
                   <span className="text-black me-3"> Total Amount</span>
-                  <span style={{ fontSize: "25px" }}>$1221</span>
+                  <span style={{ fontSize: "25px" }}>&#8377;{total}</span>
                 </p>
               </div>
             </div>
