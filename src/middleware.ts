@@ -10,10 +10,16 @@ export function middleware(req: NextRequest) {
   if (isPublicPath && refreshToken)
     return NextResponse.redirect(new URL("/", req.url));
 
-  if (path === "/invoice" && refreshToken === "")
+  if (
+    (path === "/invoice" || path.startsWith("/invoice")) &&
+    refreshToken === ""
+  ) {
     return NextResponse.redirect(new URL("/login", req.url));
+  }
+  if (
+    (path === "/orders" || path.startsWith("/orders")) &&
+    refreshToken === ""
+  ) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
 }
-
-// const generalPaths = path === "/cart";
-// if (generalPaths && refreshToken === "")
-//   return NextResponse.redirect(new URL("/login", req.url));

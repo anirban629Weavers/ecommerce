@@ -3,7 +3,6 @@
 import OrderRow from "@/components/OrderRow";
 import TriangleLoader from "@/helpers/TriangleLoader";
 import {
-  ICounterState_Cart,
   ICounterState,
   ICounterState_Order,
 } from "@/interfaces/redux.interface";
@@ -17,17 +16,21 @@ const Orders = () => {
   const dispatch: any = useDispatch();
   const router = useRouter();
 
-  const { userInfo }: ICounterState = useSelector((state: any) => state.user);
+  const { userInfo, refreshToken }: ICounterState = useSelector(
+    (state: any) => state.user
+  );
   const { loading, orders }: ICounterState_Order = useSelector(
     (state: any) => state.order
   );
-  const { _id }: IUser_DB | any = userInfo;
-
-  console.log(orders);
 
   useEffect(() => {
-    dispatch(getAllOrders(_id as string));
-  }, [_id, dispatch]);
+    if (userInfo && refreshToken) {
+      const { _id }: IUser_DB | any = userInfo;
+      dispatch(getAllOrders(_id as string));
+    } else {
+      router.push("/login");
+    }
+  }, [dispatch, refreshToken, router, userInfo]);
 
   return (
     <div
@@ -35,7 +38,7 @@ const Orders = () => {
       style={{ marginBottom: "7%" }}
     >
       {loading && <TriangleLoader />}
-      {orders.length !== 0 && (
+      {orders.length !== 0 ? (
         <table className="table mt-3">
           <thead>
             <tr>
@@ -55,6 +58,10 @@ const Orders = () => {
             ))}
           </tbody>
         </table>
+      ) : (
+        <p className="text-center" style={{ margin: "7%" }}>
+          <strong>Your Cart is Empty</strong>
+        </p>
       )}
     </div>
   );

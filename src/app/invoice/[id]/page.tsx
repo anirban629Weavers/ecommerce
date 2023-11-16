@@ -13,15 +13,17 @@ import CustomerDetails from "../../../components/CustomerDetails";
 import { BrandHeading } from "@/helpers";
 import InvoiceDetails from "../../../components/InvoiceDetails";
 import ItemDetails from "../../../components/ItemDetails";
+import { useRouter } from "next/navigation";
 
 const SingleInvoice = ({ params }: { params: { id: string } }) => {
   const oid = params.id;
   const dispatch: any = useDispatch();
+  const router = useRouter();
 
   const { currentOrder, loading }: ICounterState_Order = useSelector(
     (state: any) => state.order
   );
-
+  const [_id, set_id] = useState("");
   const {
     address,
     customer,
@@ -35,12 +37,23 @@ const SingleInvoice = ({ params }: { params: { id: string } }) => {
     subtotal,
   } = currentOrder as IOrderData_DB;
 
-  const { userInfo }: ICounterState = useSelector((state: any) => state.user);
-  const { _id } = userInfo as IUser_DB;
+  const { userInfo, refreshToken }: ICounterState = useSelector(
+    (state: any) => state.user
+  );
 
   useEffect(() => {
-    dispatch(getSingleOrder({ oid, uid: _id }));
-  }, [_id, dispatch, oid]);
+    if (userInfo && refreshToken) {
+      const { _id } = userInfo as IUser_DB;
+      set_id(_id);
+      dispatch(getSingleOrder({ oid, uid: _id }));
+    } else {
+      router.push("/login");
+    }
+  }, [dispatch, oid, refreshToken, router, userInfo]);
+
+  useEffect(() => {
+    !refreshToken && !userInfo && router.push("/login");
+  }, [refreshToken, router, userInfo]);
 
   return (
     <div className="card" style={{ marginBottom: "5%" }}>

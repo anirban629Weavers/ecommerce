@@ -27,6 +27,7 @@ const ShowProduct = ({
             alt=""
             width={width}
             height={100}
+            loading="lazy"
           />
           <h3 className="product-title">{name}</h3>
           <strong className="product-price">

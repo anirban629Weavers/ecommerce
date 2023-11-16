@@ -32,9 +32,13 @@ const OrderRow = ({
       </td>
       <td>{orderItem.orderItems.length}</td>
       <td>
-        <Link href={`/invoice/${orderItem._id}`}>
+        <Link
+          href={`/invoice/${orderItem._id}`}
+          className="text-decoration-none "
+        >
+          Invoice
           <i
-            className="fa-solid fa-location-arrow fa-lg"
+            className="ms-1 fa-solid fa-location-arrow fa-lg"
             style={{ cursor: "pointer" }}
           ></i>
         </Link>
