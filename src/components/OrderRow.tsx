@@ -30,7 +30,7 @@ const OrderRow = ({
           <span className="text-warning">Pending</span>
         )}
       </td>
-      <td>5</td>
+      <td>{orderItem.orderItems.length}</td>
       <td>
         <Link href={`/invoice/${orderItem._id}`}>
           <i
