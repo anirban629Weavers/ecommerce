@@ -1,4 +1,4 @@
-import { ICartItem, IOrderData_DB } from "./order.interface";
+import { ICartItem, IOrderData, IOrderData_DB } from "./order.interface";
 import { IProduct_DB } from "./product.interface";
 import { IUser_DB } from "./user.interface";
 
@@ -36,4 +36,5 @@ export interface ICounterState_Order {
   loading: boolean;
   success: boolean;
   orderDetails: object | undefined | IOrderData_DB;
+  orders: Array<IOrderData_DB>;
 }

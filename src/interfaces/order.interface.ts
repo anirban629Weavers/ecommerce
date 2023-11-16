@@ -53,3 +53,6 @@ export interface IOrderData_DB {
   updatedAt: string;
   __v: number;
 }
+export interface IOrderClient_Page {
+  
+}

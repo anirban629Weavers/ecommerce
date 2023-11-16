@@ -83,20 +83,22 @@ const Header = () => {
               <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                 <li>
                   <span className="nav-link active">
-                    Welcome, {(userInfo as IUser_DB).firstname}
+                    Welcome, {(userInfo as IUser_DB).firstname}{" "}
                   </span>
                 </li>
                 <li>
+                  <Link
+                    href="/orders"
+                    className="me-2 nav-link active "
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    <i className="fa-solid fa-basket-shopping fa-xl me-2"></i>
+                    Orders
+                  </Link>
+                </li>
+                <li>
                   <Link className="nav-link me-4 active" href="/cart">
-                    {/* <span className="me-2">Cart</span> */}
-                    <CartIcon count={cartItemsQuantity.toString()} />
-
-                    {/* <Image
-                      src="images/cart.svg"
-                      alt=""
-                      width={20}
-                      height={20}
-                    /> */}
+                    <CartIcon count={cartItemsQuantity.toString()} />Cart
                   </Link>
                 </li>
                 <li

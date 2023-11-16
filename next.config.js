@@ -6,6 +6,7 @@ const nextConfig = {
       "cdn.godrej.com",
       "www.godrejinterio.com",
       "source.unsplash.com",
+      "mdbootstrap.com",
     ],
   },
 };
