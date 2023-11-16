@@ -14,3 +14,4 @@ export const GET_ALL_PRODUCTS = "/api/products/all";
 // ORDER URL
 export const CREATE_ORDER = "/api/orders/create";
 export const ALL_ORDERS = "/api/orders/all";
+export const SINGLE_ORDER = "/api/orders/single";

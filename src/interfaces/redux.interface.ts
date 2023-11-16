@@ -37,4 +37,5 @@ export interface ICounterState_Order {
   success: boolean;
   orderDetails: object | undefined | IOrderData_DB;
   orders: Array<IOrderData_DB>;
+  currentOrder: IOrderData_DB | undefined;
 }

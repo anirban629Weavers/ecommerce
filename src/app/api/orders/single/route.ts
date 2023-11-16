@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/db";
 import Order from "@/models/order.model";
-import { IOrderData } from "@/interfaces/order.interface";
 
 export const GET = async (req: NextRequest) => {
   const searchParams = req.nextUrl.searchParams;
@@ -15,7 +14,7 @@ export const GET = async (req: NextRequest) => {
       {
         success: true,
         message: "success",
-        orderDetails: existingOrder,
+        currentOrder: existingOrder,
       },
       {
         status: 200,

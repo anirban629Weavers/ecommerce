@@ -20,7 +20,7 @@ const OrderRow = ({
         {orderItem.status === true ? (
           <span className="text-primary">Paid</span>
         ) : (
-          <span className="text-warning">Paid</span>
+          <span className="text-warning">Unpaid</span>
         )}
       </td>
       <td>
@@ -32,11 +32,7 @@ const OrderRow = ({
       </td>
       <td>5</td>
       <td>
-        {/* <i
-        className="fa-solid fa-trash me-4 fa-lg"
-        style={{ cursor: "pointer" }}
-      ></i> */}
-        <Link href={"/"}>
+        <Link href={`/invoice/${orderItem._id}`}>
           <i
             className="fa-solid fa-location-arrow fa-lg"
             style={{ cursor: "pointer" }}

@@ -1,50 +1,46 @@
 "use client";
-
-import { BrandHeading } from "@/helpers";
 import TriangleLoader from "@/helpers/TriangleLoader";
-import { IOrderAddress, IOrderData_DB } from "@/interfaces/order.interface";
+import { IOrderData_DB } from "@/interfaces/order.interface";
 import {
   ICounterState,
   ICounterState_Order,
 } from "@/interfaces/redux.interface";
-import { makeCartEmpty } from "@/redux/slices/cartSlice";
-import { useRouter } from "next/navigation";
+import { IUser_DB } from "@/interfaces/user.interface";
+import { getSingleOrder } from "@/redux/slices/orderSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CustomerDetails from "../../components/CustomerDetails";
-import InvoiceDetails from "../../components/InvoiceDetails";
-import ItemDetails from "../../components/ItemDetails";
+import CustomerDetails from "../../../components/CustomerDetails";
+import { BrandHeading } from "@/helpers";
+import InvoiceDetails from "../../../components/InvoiceDetails";
+import ItemDetails from "../../../components/ItemDetails";
 
-const Invoice = () => {
+const SingleInvoice = ({ params }: { params: { id: string } }) => {
+  const oid = params.id;
   const dispatch: any = useDispatch();
-  const router = useRouter();
-  dispatch(makeCartEmpty());
 
-  const { orderDetails, loading }: ICounterState_Order = useSelector(
+  const { currentOrder, loading }: ICounterState_Order = useSelector(
     (state: any) => state.order
   );
 
   const {
-    orderItems,
-    _id,
-    email,
+    address,
     customer,
+    deliverycharge,
+    email,
+    phone,
     createdAt,
     status,
-    phone,
-    deliverycharge,
+    orderItems,
     total,
     subtotal,
-    address,
-  } = orderDetails as IOrderData_DB;
+  } = currentOrder as IOrderData_DB;
 
-  const { refreshToken, userInfo }: ICounterState = useSelector(
-    (state: any) => state.user
-  );
+  const { userInfo }: ICounterState = useSelector((state: any) => state.user);
+  const { _id } = userInfo as IUser_DB;
 
   useEffect(() => {
-    !refreshToken && !userInfo && router.push("/login");
-  }, [refreshToken, router, userInfo]);
+    dispatch(getSingleOrder({ oid, uid: _id }));
+  }, [_id, dispatch, oid]);
 
   return (
     <div className="card" style={{ marginBottom: "5%" }}>
@@ -72,9 +68,9 @@ const Invoice = () => {
             <div className="col-md-12">
               <div className="text-center">
                 {/* <i
-                  className="fab fa-mdb fa-4x ms-0"
-                  style={{ color: "#5d9fc5" }}
-                ></i> */}
+              className="fab fa-mdb fa-4x ms-0"
+              style={{ color: "#5d9fc5" }}
+            ></i> */}
                 <BrandHeading />
                 <p className="pt-0">The Class A Interrior Materials</p>
               </div>
@@ -145,21 +141,25 @@ const Invoice = () => {
                 </p>
               </div>
             </div>
-            <hr />
-            <div className="row">
-              <div className="col-xl-10">
-                <p>Thank you for your purchase</p>
-              </div>
-              <div className="col-xl-2">
-                <button
-                  type="button"
-                  className="btn btn-primary text-capitalize"
-                  style={{ backgroundColor: "#3B5D50" }}
-                >
-                  Pay Now
-                </button>
-              </div>
-            </div>
+            {status !== true && (
+              <>
+                <hr />
+                <div className="row">
+                  <div className="col-xl-10">
+                    <p>Thank you for your purchase</p>
+                  </div>
+                  <div className="col-xl-2">
+                    <button
+                      type="button"
+                      className="btn btn-primary text-capitalize"
+                      style={{ backgroundColor: "#3B5D50" }}
+                    >
+                      Pay Now
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -167,4 +167,4 @@ const Invoice = () => {
   );
 };
 
-export default Invoice;
+export default SingleInvoice;
