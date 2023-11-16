@@ -15,6 +15,13 @@ export interface ICartItem_Order_Invoice {
     amount: number;
   };
 }
+export interface IOrderAddress {
+  addressline1: string;
+  addressline2: string;
+  city: string;
+  state: string;
+  zipcode: string;
+}
 
 export interface IOrderData {
   customer: string;
@@ -25,7 +32,7 @@ export interface IOrderData {
   subtotal: number;
   deliverycharge: number;
   total: number;
-  isDelivered: boolean;
+  isDelivered: boolean
 }
 export interface IOrderData_DB {
   _id: string;

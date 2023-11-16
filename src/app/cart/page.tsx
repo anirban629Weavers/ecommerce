@@ -1,8 +1,10 @@
 "use client";
+import AddressButtonTemp from "@/components/AddressButtonTemp";
 import CartItem from "@/components/CartItem";
 import TriangleLoader from "@/helpers/TriangleLoader";
 import {
   ICartItem_Order_Invoice,
+  IOrderAddress,
   IOrderData,
 } from "@/interfaces/order.interface";
 import {
@@ -12,13 +14,13 @@ import {
 import { IUser_DB } from "@/interfaces/user.interface";
 import { loadCartItems_local } from "@/redux/slices/cartSlice";
 import { createOrder } from "@/redux/slices/orderSlice";
+import { isAddressFilled } from "@/utils/addressFilled";
 import { warningOptions } from "@/utils/alerts";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import AddressButtonTemp from "./AddressButtonTemp";
 
 const Cart = () => {
   const dispatch: any = useDispatch();
@@ -32,6 +34,16 @@ const Cart = () => {
   const { loading }: ICounterState = useSelector((state: any) => state.order);
 
   const [total, setTotal] = useState(0);
+  const [address, setAddress] = useState<IOrderAddress>({
+    addressline1: "",
+    addressline2: "",
+    city: "",
+    state: "",
+    zipcode: "",
+  });
+  const saveAddress = (address: IOrderAddress) => {
+    setAddress(address);
+  };
 
   useEffect(() => {
     dispatch(loadCartItems_local());
@@ -125,9 +137,16 @@ const Cart = () => {
                     Continue Shopping
                   </Link>
                 </div>
-                <div className="col-md-6">
-                  <AddressButtonTemp />
-                </div>
+                {userInfo && refreshToken && (
+                  <div className="col-md-6">
+                    <AddressButtonTemp onInput={saveAddress} />
+                    {isAddressFilled(address) && (
+                      <span className="ms-2">
+                        {address.addressline1.substring(0, 10)}...
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
               {userInfo && refreshToken && (
                 <div className="row">

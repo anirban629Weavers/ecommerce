@@ -37,3 +37,11 @@ export const LoginValidationSchema = yup.object({
     .required("Please enter your email address"),
   password: yup.string().required("Please enter password"),
 });
+
+export const AddressValidationSchema = yup.object({
+  addressline1: yup.string().required("Please enter Address Line 1"),
+  addressline2: yup.string().required("Please enter Address Line 2"),
+  city: yup.string().required("Please enter City"),
+  state: yup.string().required("Please enter State"),
+  zipcode: yup.string().required("Please enter Zip-Code"),
+});
