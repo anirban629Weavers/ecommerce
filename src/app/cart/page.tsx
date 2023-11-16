@@ -16,6 +16,7 @@ import { loadCartItems_local } from "@/redux/slices/cartSlice";
 import { createOrder } from "@/redux/slices/orderSlice";
 import { isAddressFilled } from "@/utils/addressFilled";
 import { warningOptions } from "@/utils/alerts";
+import mongoose from "mongoose";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -56,8 +57,10 @@ const Cart = () => {
     if (!userInfo && !refreshToken) {
       toast.warning("Login Required", warningOptions);
       router.push("/login");
+    } else if (!isAddressFilled(address)) {
+      toast.warning("Please fill your address", warningOptions);
     } else {
-      const { firstname, lastname, email, phone } = userInfo as IUser_DB;
+      const { firstname, lastname, email, phone, _id } = userInfo as IUser_DB;
       const orderItems: Array<ICartItem_Order_Invoice> = [];
       cartItems.forEach((item) => {
         orderItems.push({
@@ -71,6 +74,7 @@ const Cart = () => {
         });
       });
       const orderDetails: IOrderData = {
+        customerId: _id as any,
         customer: `${firstname} ${lastname}`,
         deliverycharge: totalAmount !== 0 && totalAmount < 500 ? 50 : 0,
         email: email,
@@ -80,6 +84,7 @@ const Cart = () => {
         status: false,
         subtotal: Math.ceil(totalAmount),
         total: Math.ceil(total),
+        address,
       };
       dispatch(createOrder(orderDetails));
       router.push("/invoice");

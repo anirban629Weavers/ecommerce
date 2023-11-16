@@ -2,7 +2,7 @@
 
 import { BrandHeading } from "@/helpers";
 import TriangleLoader from "@/helpers/TriangleLoader";
-import { IOrderData_DB } from "@/interfaces/order.interface";
+import { IOrderAddress, IOrderData_DB } from "@/interfaces/order.interface";
 import {
   ICounterState,
   ICounterState_Order,
@@ -16,10 +16,12 @@ const CustomerDetails = ({
   name,
   email,
   phone,
+  address,
 }: {
   name: string;
   email: string;
   phone: string;
+  address: IOrderAddress;
 }) => {
   return (
     <ul className="list-unstyled">
@@ -34,6 +36,10 @@ const CustomerDetails = ({
       </li>
       <li className="text-muted">
         <i className="fa-solid fa-globe mr-2"></i> India
+      </li>
+      <li className="text-muted">
+        <i className="fa-solid fa-location-dot mr-2"></i> {address.addressline1}{" "}
+        {address.city}
       </li>
     </ul>
   );
@@ -125,6 +131,7 @@ const Invoice = () => {
     deliverycharge,
     total,
     subtotal,
+    address,
   } = orderDetails as IOrderData_DB;
 
   const { refreshToken, userInfo }: ICounterState = useSelector(
@@ -171,7 +178,12 @@ const Invoice = () => {
 
             <div className="row">
               <div className="col-xl-8">
-                <CustomerDetails email={email} name={customer} phone={phone} />
+                <CustomerDetails
+                  email={email}
+                  name={customer}
+                  phone={phone}
+                  address={address}
+                />
               </div>
               <div className="col-xl-4">
                 <p className="text-muted">Invoice</p>

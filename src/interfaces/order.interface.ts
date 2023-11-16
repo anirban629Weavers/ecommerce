@@ -1,3 +1,4 @@
+import mongoose, { mongo } from "mongoose";
 import { IProduct_DB } from "./product.interface";
 
 export interface ICartItem {
@@ -24,6 +25,7 @@ export interface IOrderAddress {
 }
 
 export interface IOrderData {
+  customerId: typeof mongoose.Types.ObjectId;
   customer: string;
   email: string;
   phone: string;
@@ -32,7 +34,8 @@ export interface IOrderData {
   subtotal: number;
   deliverycharge: number;
   total: number;
-  isDelivered: boolean
+  isDelivered: boolean;
+  address: IOrderAddress;
 }
 export interface IOrderData_DB {
   _id: string;
@@ -45,6 +48,7 @@ export interface IOrderData_DB {
   deliverycharge: number;
   total: number;
   isDelivered: boolean;
+  address: IOrderAddress;
   createdAt: string;
   updatedAt: string;
   __v: number;

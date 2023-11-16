@@ -15,9 +15,34 @@ const cartItemSchema = new Schema<ICartItem>({
     required: true,
   },
 });
-
+const addressSchema = new Schema({
+  addressline1: {
+    type: String,
+    required: true,
+  },
+  addressline2: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  state: {
+    type: String,
+    required: true,
+  },
+  zipcode: {
+    type: String,
+    required: true,
+  },
+});
 const orderSchema = new Schema<IOrderData>(
   {
+    customerId: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+    },
     customer: {
       type: String,
       required: true,
@@ -52,6 +77,10 @@ const orderSchema = new Schema<IOrderData>(
     },
     isDelivered: {
       type: Boolean,
+      required: true,
+    },
+    address: {
+      type: addressSchema,
       required: true,
     },
   },
