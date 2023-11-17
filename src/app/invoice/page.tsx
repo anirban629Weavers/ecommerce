@@ -157,6 +157,7 @@ const Invoice = () => {
                   className="btn btn-primary text-capitalize"
                   style={{ backgroundColor: "#3B5D50" }}
                   // onClick={() => CheckOut(orderItems)}
+                  onClick={() => alert("CheckOut(orderItems) is Coming Soon")}
                 >
                   Pay Now
                 </button>
