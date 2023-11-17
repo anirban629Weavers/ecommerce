@@ -28,7 +28,6 @@ const AllUsers = () => {
   return (
     <div className="container table-responsive mt-4">
       {loading && <TriangleLoader />}
-      asjkibudk
       {users.length === 0 ? (
         <p className="text-center" style={{ margin: "7%" }}>
           <strong>Your Cart is Empty</strong>

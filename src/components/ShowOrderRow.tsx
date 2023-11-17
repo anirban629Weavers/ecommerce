@@ -9,7 +9,6 @@ const ShowOrderRow = ({
   order: IOrderData_DB;
   index: number;
 }) => {
-  console.log(order);
   return (
     <tr>
       <td scope="col">{index + 1}</td>
@@ -43,7 +42,7 @@ const ShowOrderRow = ({
           <span className="text-danger">Pending</span>
         )}
       </td>
-      <td scope="col">1</td>
+      <td scope="col">{order.orderItems.length}</td>
     </tr>
   );
 };

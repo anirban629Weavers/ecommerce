@@ -89,6 +89,20 @@ export const adminSlice = createSlice({
         state.error = action.payload as string;
         state.isAdmin = false;
       })
+      .addCase(getAllOrdersAdmin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllOrdersAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.message = action.payload.message;
+        state.allOrders = action.payload.orders;
+      })
+      .addCase(getAllOrdersAdmin.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload as string;
+      })
       .addCase(getAllUsersAdmin.pending, (state) => {
         state.loading = true;
       })
