@@ -1,6 +1,6 @@
 "use client";
 import TriangleLoader from "@/helpers/TriangleLoader";
-import { counterState } from "@/interfaces/redux.interface";
+import { ICounterState } from "@/interfaces/redux.interface";
 import { IUser_CLIENT } from "@/interfaces/user.interface";
 import { resetState, signupUser } from "@/redux/slices/userSlice";
 import { errorOptions, successOptions } from "@/utils/alerts";
@@ -18,8 +18,15 @@ const Signup = () => {
   const dispatch: any = useDispatch();
   const router = useRouter();
 
-  const { error, loading, message, userInfo, success, token }: counterState =
-    useSelector((state: any) => state.user);
+  const {
+    error,
+    loading,
+    message,
+    userInfo,
+    success,
+    accessToken,
+    refreshToken,
+  }: ICounterState = useSelector((state: any) => state.user);
 
   const signupHandler = (values: any) => {
     const userData: IUser_CLIENT = {
@@ -35,16 +42,16 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    error && toast.error(error, errorOptions);
+    error && toast.error(error, errorOptions) && dispatch(resetState());
     success &&
       userInfo &&
-      token &&
+      refreshToken &&
       toast.success(message, successOptions) &&
       setTimeout(() => {
         dispatch(resetState());
         router.push("/");
       }, 1500);
-  }, [error, message, router, success, userInfo, token, dispatch]);
+  }, [error, message, router, success, userInfo, dispatch, refreshToken]);
 
   return (
     <section className="vh-100 gradient-custom">

@@ -60,7 +60,7 @@ const Orders = () => {
         </table>
       ) : (
         <p className="text-center" style={{ margin: "7%" }}>
-          <strong>Your Cart is Empty</strong>
+          <strong>No Orders Found</strong>
         </p>
       )}
     </div>

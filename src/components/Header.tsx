@@ -6,7 +6,7 @@ import {
   ICounterState_Cart,
 } from "@/interfaces/redux.interface";
 import { IUser_DB } from "@/interfaces/user.interface";
-import { signoutUser } from "@/redux/slices/userSlice";
+import { resetState, signoutUser } from "@/redux/slices/userSlice";
 import { cartQuantity } from "@/redux/slices/cartSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -98,13 +98,15 @@ const Header = () => {
                 </li>
                 <li>
                   <Link className="nav-link me-4 active" href="/cart">
-                    <CartIcon count={cartItemsQuantity.toString()} />Cart
+                    <CartIcon count={cartItemsQuantity.toString()} />
+                    Cart
                   </Link>
                 </li>
                 <li
                   className="nav-link active"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
+                    dispatch(resetState());
                     dispatch(signoutUser());
                   }}
                 >

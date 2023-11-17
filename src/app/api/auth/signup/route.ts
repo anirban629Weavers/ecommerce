@@ -12,44 +12,47 @@ export const POST = async (req: NextRequest) => {
     await connectDB();
     const userData: IUser = await req.json();
     const isUser = await User.findOne({ email: userData.email });
+    console.log(isUser);
     if (isUser) throw new Error("User Already exists");
-    const user = await User.create(userData);
-    if (user) {
-      const accessToken = generateAccessToken({ id: user._id });
-      const refreshToken = generateRefreshToken({
-        id: user._id,
-        email: user.email,
-        firstname: user.firstname,
-        lastname: user.lastname,
-      });
-      cookie.set({
-        name: "accessToken",
-        value: accessToken,
-        httpOnly: true,
-        path: "/",
-        maxAge: oneDay * 3,
-      });
-      cookie.set({
-        name: "refreshToken",
-        value: refreshToken,
-        httpOnly: true,
-        path: "/",
-        maxAge: oneDay * 3,
-      });
+    else {
+      const user = await User.create(userData);
+      if (user) {
+        const accessToken = generateAccessToken({ id: user._id });
+        const refreshToken = generateRefreshToken({
+          id: user._id,
+          email: user.email,
+          firstname: user.firstname,
+          lastname: user.lastname,
+        });
+        cookie.set({
+          name: "accessToken",
+          value: accessToken,
+          httpOnly: true,
+          path: "/",
+          maxAge: oneDay * 3,
+        });
+        cookie.set({
+          name: "refreshToken",
+          value: refreshToken,
+          httpOnly: true,
+          path: "/",
+          maxAge: oneDay * 3,
+        });
 
-      return NextResponse.json(
-        {
-          success: true,
-          message: "User Registered Successfully",
-          user,
-          accessToken,
-          refreshToken,
-        },
-        {
-          status: 200,
-        }
-      );
-    } else throw new Error("Internal Server Error");
+        return NextResponse.json(
+          {
+            success: true,
+            message: "User Registered Successfully",
+            user,
+            accessToken,
+            refreshToken,
+          },
+          {
+            status: 200,
+          }
+        );
+      } else throw new Error("Internal Server Error");
+    }
   } catch (error: any) {
     return NextResponse.json({
       success: false,
