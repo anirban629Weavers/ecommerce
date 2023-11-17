@@ -14,6 +14,7 @@ import userReducer from "./slices/userSlice";
 import productReducer from "./slices/productSlice";
 import cartReducer from "./slices/cartSlice";
 import orderReducer from "./slices/orderSlice";
+import adminSlice from "./slices/adminSlice";
 
 const persistConfig = {
   key: "interio.",
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   product: productReducer,
   cart: cartReducer,
   order: orderReducer,
+  admin: adminSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -18,6 +18,7 @@ export const POST = async function (req: NextRequest) {
       email: tokenData.email,
       firstname: tokenData.firstname,
       lastname: tokenData.lastname,
+      isAdmin: tokenData.isAdmin,
     };
 
     const newAccessToken = generateAccessToken({ id: tokenData.id });

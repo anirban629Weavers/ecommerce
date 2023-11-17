@@ -7,6 +7,7 @@ import {
 } from "@/interfaces/redux.interface";
 import { IUser_DB } from "@/interfaces/user.interface";
 import { resetState, signoutUser } from "@/redux/slices/userSlice";
+import { resetState as resetState_Admin } from "@/redux/slices/adminSlice";
 import { cartQuantity } from "@/redux/slices/cartSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -83,7 +84,44 @@ const Header = () => {
               <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                 <li>
                   <span className="nav-link active">
-                    Welcome, {(userInfo as IUser_DB).firstname}{" "}
+                    {(userInfo as IUser_DB).isAdmin ? (
+                      <>
+                        Welcome,{" "}
+                        <div
+                          className="btn-group cursor-pointer"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <div
+                            className="bg-transparent text-white"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            {(userInfo as IUser_DB).firstname} (Admin){" "}
+                            <i className="fa-solid fa-caret-down"></i>
+                          </div>
+                          <ul className="dropdown-menu">
+                            <li>
+                              <Link
+                                className="dropdown-item"
+                                href="/admin/all-orders"
+                              >
+                                All Orders
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="dropdown-item"
+                                href="/admin/all-users"
+                              >
+                                All Users
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </>
+                    ) : (
+                      `Welcome, ${(userInfo as IUser_DB).firstname}`
+                    )}
                   </span>
                 </li>
                 <li>
@@ -99,7 +137,6 @@ const Header = () => {
                 <li>
                   <Link className="nav-link me-4 active" href="/cart">
                     <CartIcon count={cartItemsQuantity.toString()} />
-                    Cart
                   </Link>
                 </li>
                 <li
@@ -108,6 +145,7 @@ const Header = () => {
                   onClick={() => {
                     dispatch(resetState());
                     dispatch(signoutUser());
+                    dispatch(resetState_Admin());
                   }}
                 >
                   Logout <i className="fa-solid fa-right-from-bracket"></i>

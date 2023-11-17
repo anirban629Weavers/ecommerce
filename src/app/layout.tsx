@@ -7,6 +7,7 @@ import StoreProvider from "@/redux/StoreProvider";
 import "react-toastify/dist/ReactToastify.css";
 import TokenValidator from "@/interceptor/TokenValidator";
 import { ToastContainer } from "react-toastify";
+import AdminRoute from "@/components/AdminRoute";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +27,11 @@ export default function RootLayout({
         <StoreProvider>
           <TokenValidator>
             <ToastContainer />
-            <Header />
-            {children}
-            <Footer />
+            <AdminRoute>
+              <Header />
+              {children}
+              <Footer />
+            </AdminRoute>
           </TokenValidator>
         </StoreProvider>
 

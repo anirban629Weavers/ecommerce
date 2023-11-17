@@ -20,6 +20,7 @@ export const POST = async (req: NextRequest) => {
           email: user.email,
           firstname: user.firstname,
           lastname: user.lastname,
+          isAdmin: user.isAdmin,
         });
         cookie.set({
           name: "accessToken",

@@ -15,3 +15,8 @@ export const GET_ALL_PRODUCTS = "/api/products/all";
 export const CREATE_ORDER = "/api/orders/create";
 export const ALL_ORDERS = "/api/orders/all";
 export const SINGLE_ORDER = "/api/orders/single";
+
+// ADMIN URL
+export const IS_ADMIN_CHECK = "/api/auth/admin";
+export const FETCH_ALL_ORDERS = "/api/auth/admin/all-orders";
+export const FETCH_ALL_USERS = "/api/auth/admin/all-users";

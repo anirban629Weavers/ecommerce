@@ -39,3 +39,13 @@ export interface ICounterState_Order {
   orders: Array<IOrderData_DB>;
   currentOrder: IOrderData_DB | undefined;
 }
+
+export interface ICounterState_Admin {
+  message: string | undefined;
+  error: string | undefined;
+  loading: boolean;
+  success: boolean;
+  isAdmin: boolean | undefined;
+  allOrders: Array<IOrderData_DB>;
+  allUsers: Array<IUser_DB>;
+}
