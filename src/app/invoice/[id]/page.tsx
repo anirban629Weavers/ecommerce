@@ -14,6 +14,7 @@ import { BrandHeading } from "@/helpers";
 import InvoiceDetails from "../../../components/InvoiceDetails";
 import ItemDetails from "../../../components/ItemDetails";
 import { useRouter } from "next/navigation";
+import { CheckOut } from "@/app/stripe";
 
 const SingleInvoice = ({ params }: { params: { id: string } }) => {
   const oid = params.id;
@@ -166,6 +167,7 @@ const SingleInvoice = ({ params }: { params: { id: string } }) => {
                       type="button"
                       className="btn btn-primary text-capitalize"
                       style={{ backgroundColor: "#3B5D50" }}
+                      // onClick={() => CheckOut(orderItems)}
                     >
                       Pay Now
                     </button>

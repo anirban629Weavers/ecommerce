@@ -2,18 +2,19 @@
 
 import { BrandHeading } from "@/helpers";
 import TriangleLoader from "@/helpers/TriangleLoader";
-import { IOrderAddress, IOrderData_DB } from "@/interfaces/order.interface";
+import { IOrderData_DB } from "@/interfaces/order.interface";
 import {
   ICounterState,
   ICounterState_Order,
 } from "@/interfaces/redux.interface";
 import { makeCartEmpty } from "@/redux/slices/cartSlice";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomerDetails from "../../components/CustomerDetails";
 import InvoiceDetails from "../../components/InvoiceDetails";
 import ItemDetails from "../../components/ItemDetails";
+import { CheckOut } from "../stripe";
 
 const Invoice = () => {
   const dispatch: any = useDispatch();
@@ -155,6 +156,7 @@ const Invoice = () => {
                   type="button"
                   className="btn btn-primary text-capitalize"
                   style={{ backgroundColor: "#3B5D50" }}
+                  // onClick={() => CheckOut(orderItems)}
                 >
                   Pay Now
                 </button>
