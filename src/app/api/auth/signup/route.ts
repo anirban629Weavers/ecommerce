@@ -12,7 +12,6 @@ export const POST = async (req: NextRequest) => {
     await connectDB();
     const userData: IUser = await req.json();
     const isUser = await User.findOne({ email: userData.email });
-    console.log(isUser);
     if (isUser) throw new Error("User Already exists");
     else {
       const user = await User.create(userData);

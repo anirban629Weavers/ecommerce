@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const HelpSection = () => {
@@ -8,13 +9,13 @@ const HelpSection = () => {
           <div className="col-lg-7 mb-5 mb-lg-0">
             <div className="imgs-grid">
               <div className="grid grid-1">
-                <img src="images/img-grid-1.jpg" alt="Untree.co" />
+                <Image  src="/images/img-grid-1.jpg" alt="Untree.co" width={400} height={400}/> 
               </div>
               <div className="grid grid-2">
-                <img src="images/img-grid-2.jpg" alt="Untree.co" />
+                <Image src="/images/img-grid-2.jpg" alt="Untree.co" width={300} height={250}/> 
               </div>
               <div className="grid grid-3">
-                <img src="images/img-grid-3.jpg" alt="Untree.co" />
+                <Image  src="/images/img-grid-3.jpg" alt="Untree.co" width={400} height={400}/> 
               </div>
             </div>
           </div>
