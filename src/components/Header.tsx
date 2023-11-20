@@ -84,44 +84,50 @@ const Header = () => {
               <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                 <li>
                   <span className="nav-link active">
-                    {(userInfo as IUser_DB).isAdmin ? (
-                      <>
-                        Welcome,{" "}
+                    <>
+                      Welcome,{" "}
+                      <div
+                        className="btn-group cursor-pointer"
+                        style={{ cursor: "pointer" }}
+                      >
                         <div
-                          className="btn-group cursor-pointer"
-                          style={{ cursor: "pointer" }}
+                          className="bg-transparent text-white"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
                         >
-                          <div
-                            className="bg-transparent text-white"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            {(userInfo as IUser_DB).firstname} (Admin){" "}
-                            <i className="fa-solid fa-caret-down"></i>
-                          </div>
-                          <ul className="dropdown-menu">
-                            <li>
-                              <Link
-                                className="dropdown-item"
-                                href="/admin/all-orders"
-                              >
-                                All Orders
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                className="dropdown-item"
-                                href="/admin/all-users"
-                              >
-                                All Users
-                              </Link>
-                            </li>
-                          </ul>
+                          {(userInfo as IUser_DB).firstname}{" "}
+                          {(userInfo as IUser_DB).isAdmin && <>(Admin) </>}
+                          <i className="fa-solid fa-caret-down"></i>
                         </div>
-                      </>
-                    ) : (
-                      `Welcome, ${(userInfo as IUser_DB).firstname}`
-                    )}
+                        <ul className="dropdown-menu">
+                          <li>
+                            <Link className="dropdown-item" href="/profile">
+                              Profile
+                            </Link>
+                          </li>
+                          {(userInfo as IUser_DB).isAdmin && (
+                            <>
+                              <li>
+                                <Link
+                                  className="dropdown-item"
+                                  href="/admin/all-orders"
+                                >
+                                  All Orders
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  className="dropdown-item"
+                                  href="/admin/all-users"
+                                >
+                                  All Users
+                                </Link>
+                              </li>
+                            </>
+                          )}
+                        </ul>
+                      </div>
+                    </>
                   </span>
                 </li>
                 <li>

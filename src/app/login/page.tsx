@@ -33,7 +33,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    error && toast.error(error, errorOptions);
+    error && toast.error(error, errorOptions) && dispatch(resetState());
     success &&
       userInfo &&
       refreshToken &&

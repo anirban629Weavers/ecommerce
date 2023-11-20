@@ -2,6 +2,7 @@ import {
   LOGIN_USER_URL,
   SIGNUP_USER_URL,
   SIGNOUT_USER_URL,
+  UPDATE_USER_URL,
 } from "@/configs/url.config";
 import { ICounterState } from "@/interfaces/redux.interface";
 import { IUser_CLIENT, IUser_Login } from "@/interfaces/user.interface";
@@ -55,6 +56,22 @@ export const signoutUser = createAsyncThunk(
   "users/signout-user",
   async (_, thunkAPI) => {
     const { data } = await axios.get(SIGNOUT_USER_URL, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (data.success) {
+      return data;
+    } else {
+      return thunkAPI.rejectWithValue(data.error);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "users/update-user",
+  async (updateData: object, thunkAPI) => {
+    const { data } = await axios.put(UPDATE_USER_URL, updateData, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -123,6 +140,19 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(signoutUser.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.loading = false;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.userInfo = action.payload.user;
+        state.message = action.payload.message;
+        state.success = true;
+        state.loading = false;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
         state.error = action.payload as string;
         state.loading = false;
       });

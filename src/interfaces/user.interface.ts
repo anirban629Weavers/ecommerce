@@ -28,7 +28,7 @@ export interface IUser_DB {
   isAdmin: boolean;
   lastname: string;
   email: string;
-  password: string;
+  password?: string;
   phone: string;
   birthday: string;
   gender: string;

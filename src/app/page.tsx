@@ -10,8 +10,6 @@ import {
 import React from "react";
 
 const Page = () => {
-  
-  
   return (
     <>
       <HeroSection />

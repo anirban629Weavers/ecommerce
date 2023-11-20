@@ -45,3 +45,10 @@ export const AddressValidationSchema = yup.object({
   state: yup.string().required("Please enter State"),
   zipcode: yup.string().required("Please enter Zip-Code"),
 });
+
+export const UserProfileUpdateValidationSchema = yup.object({
+  fname: yup.string(),
+  lname: yup.string(),
+  phone: yup.string(),
+  bday: yup.string(),
+});

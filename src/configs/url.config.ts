@@ -20,3 +20,8 @@ export const SINGLE_ORDER = "/api/orders/single";
 export const IS_ADMIN_CHECK = "/api/auth/admin";
 export const FETCH_ALL_ORDERS = "/api/auth/admin/all-orders";
 export const FETCH_ALL_USERS = "/api/auth/admin/all-users";
+export const DELETE_USER = "/api/auth/admin/delete-user";
+export const MAKE_ADMIN = "/api/auth/admin/make-admin";
+
+// USER URLS
+export const UPDATE_USER_URL = "/api/user/update";

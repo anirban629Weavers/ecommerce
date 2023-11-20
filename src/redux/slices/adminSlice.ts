@@ -1,7 +1,9 @@
 import {
+  DELETE_USER,
   FETCH_ALL_ORDERS,
   FETCH_ALL_USERS,
   IS_ADMIN_CHECK,
+  MAKE_ADMIN,
 } from "@/configs/url.config";
 import { ICounterState_Admin } from "@/interfaces/redux.interface";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -52,7 +54,40 @@ export const getAllUsersAdmin = createAsyncThunk(
       headers: { Authorization: `Bearer ${refreshToken}` },
     });
     if (data.success) {
-      console.log(data);
+      return data;
+    } else {
+      return thunkAPI.rejectWithValue(data.error);
+    }
+  }
+);
+
+export const deleteUserAdmin = createAsyncThunk(
+  "admin/delete-user",
+  async (
+    { id, refreshToken }: { id: string; refreshToken: string },
+    thunkAPI
+  ) => {
+    const { data } = await axios.get(`${DELETE_USER}?id=${id}`, {
+      headers: { Authorization: `Bearer ${refreshToken}` },
+    });
+    if (data.success) {
+      return data;
+    } else {
+      return thunkAPI.rejectWithValue(data.error);
+    }
+  }
+);
+
+export const makeUserAdmin = createAsyncThunk(
+  "admin/make-user-admin",
+  async (
+    { id, refreshToken }: { id: string; refreshToken: string },
+    thunkAPI
+  ) => {
+    const { data } = await axios.get(`${MAKE_ADMIN}?id=${id}`, {
+      headers: { Authorization: `Bearer ${refreshToken}` },
+    });
+    if (data.success) {
       return data;
     } else {
       return thunkAPI.rejectWithValue(data.error);
@@ -113,6 +148,34 @@ export const adminSlice = createSlice({
         state.allUsers = action.payload.users;
       })
       .addCase(getAllUsersAdmin.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload as string;
+      })
+      .addCase(deleteUserAdmin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteUserAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.message = action.payload.message;
+        state.allUsers = action.payload.allUsers;
+      })
+      .addCase(deleteUserAdmin.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload as string;
+      })
+      .addCase(makeUserAdmin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(makeUserAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.message = action.payload.message;
+        state.allUsers = action.payload.allUsers;
+      })
+      .addCase(makeUserAdmin.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.error = action.payload as string;

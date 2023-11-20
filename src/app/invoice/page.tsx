@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CustomerDetails from "../../components/CustomerDetails";
 import InvoiceDetails from "../../components/InvoiceDetails";
 import ItemDetails from "../../components/ItemDetails";
-import { CheckOut } from "../stripe";
 
 const Invoice = () => {
   const dispatch: any = useDispatch();
@@ -58,14 +57,14 @@ const Invoice = () => {
                 Invoice {">>"} <strong>ID: {_id}</strong>
               </p>
             </div>
-            <div className="col-xl-3 float-end ">
+            {/* <div className="col-xl-3 float-end ">
               <div className="btn btn-light text-capitalize mx-2 bg-white text-dark">
                 <i className="fas fa-print text-primary"></i> Print
               </div>
               <div className="btn btn-light text-capitalize bg-white text-dark">
                 <i className="far fa-file-pdf text-danger"></i> Export
               </div>
-            </div>
+            </div> */}
             <hr className="mt-3" />
           </div>
 
