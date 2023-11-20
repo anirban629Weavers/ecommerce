@@ -1,7 +1,8 @@
 export interface IUser {
   isModified(arg0: string): unknown;
   _id?: string;
-  isAdmin?: true;
+  isAdmin?: boolean;
+  isSuperAdmin?: boolean;
   firstname: string;
   lastname: string;
   birthday: string;
@@ -26,6 +27,7 @@ export interface IUser_DB {
   _id: string;
   firstname: string;
   isAdmin: boolean;
+  isSuperAdmin: boolean;
   lastname: string;
   email: string;
   password?: string;

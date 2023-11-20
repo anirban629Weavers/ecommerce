@@ -22,6 +22,7 @@ export const FETCH_ALL_ORDERS = "/api/auth/admin/all-orders";
 export const FETCH_ALL_USERS = "/api/auth/admin/all-users";
 export const DELETE_USER = "/api/auth/admin/delete-user";
 export const MAKE_ADMIN = "/api/auth/admin/make-admin";
+export const REMOVE_ADMIN = "/api/auth/admin/remove-admin";
 
 // USER URLS
 export const UPDATE_USER_URL = "/api/user/update";

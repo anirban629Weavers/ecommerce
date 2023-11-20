@@ -30,7 +30,7 @@ const AllOrders = () => {
       {loading && <TriangleLoader />}
       {orders.length === 0 ? (
         <p className="text-center" style={{ margin: "7%" }}>
-          <strong>Your Cart is Empty</strong>
+          <strong>No Orders Found</strong>
         </p>
       ) : (
         <table className="table mt-3" style={{ marginBottom: "10%" }}>

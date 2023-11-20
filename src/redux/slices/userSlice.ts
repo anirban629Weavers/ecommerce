@@ -98,6 +98,15 @@ export const userSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
     },
+    resetFullUserState: (state) => {
+      state.success = false;
+      state.loading = false;
+      state.userInfo = undefined;
+      state.message = undefined;
+      state.error = undefined;
+      state.accessToken = undefined;
+      state.refreshToken = undefined;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -159,5 +168,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { resetState, updateTokens } = userSlice.actions;
+export const { resetState, updateTokens, resetFullUserState } =
+  userSlice.actions;
 export default userSlice.reducer;

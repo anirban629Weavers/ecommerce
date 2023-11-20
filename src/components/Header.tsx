@@ -6,8 +6,8 @@ import {
   ICounterState_Cart,
 } from "@/interfaces/redux.interface";
 import { IUser_DB } from "@/interfaces/user.interface";
-import { resetState, signoutUser } from "@/redux/slices/userSlice";
-import { resetState as resetState_Admin } from "@/redux/slices/adminSlice";
+import { resetFullUserState, signoutUser } from "@/redux/slices/userSlice";
+import { resetFullAdminState } from "@/redux/slices/adminSlice";
 import { cartQuantity } from "@/redux/slices/cartSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -64,7 +64,7 @@ const Header = () => {
                   About
                 </Link>
               </li>
-              <li className={pathname === "service" ? "nav-item active" : ""}>
+              <li className={pathname === "service-page" ? "nav-item active" : ""}>
                 <Link className="nav-link" href="/service-page">
                   Services
                 </Link>
@@ -149,9 +149,9 @@ const Header = () => {
                   className="nav-link active"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    dispatch(resetState());
+                    dispatch(resetFullUserState());
                     dispatch(signoutUser());
-                    dispatch(resetState_Admin());
+                    dispatch(resetFullAdminState());
                   }}
                 >
                   Logout <i className="fa-solid fa-right-from-bracket"></i>

@@ -15,6 +15,8 @@ import { toast } from "react-toastify";
 
 const UserProfile = () => {
   const dispatch: any = useDispatch();
+  const router = useRouter();
+
   const { userInfo, success, error, message, loading }: ICounterState =
     useSelector((state: any) => state.user);
 
@@ -45,7 +47,7 @@ const UserProfile = () => {
       dispatch(resetState());
     }
     if (error) toast.error(error, errorOptions);
-  }, [dispatch, error, message, success]);
+  }, [dispatch, error, message, success, router]);
 
   return (
     <>

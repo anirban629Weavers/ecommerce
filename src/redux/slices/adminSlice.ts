@@ -4,6 +4,7 @@ import {
   FETCH_ALL_USERS,
   IS_ADMIN_CHECK,
   MAKE_ADMIN,
+  REMOVE_ADMIN,
 } from "@/configs/url.config";
 import { ICounterState_Admin } from "@/interfaces/redux.interface";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -95,6 +96,23 @@ export const makeUserAdmin = createAsyncThunk(
   }
 );
 
+export const removeUserAdmin = createAsyncThunk(
+  "admin/remove-user-admin",
+  async (
+    { id, refreshToken }: { id: string; refreshToken: string },
+    thunkAPI
+  ) => {
+    const { data } = await axios.get(`${REMOVE_ADMIN}?id=${id}`, {
+      headers: { Authorization: `Bearer ${refreshToken}` },
+    });
+    if (data.success) {
+      return data;
+    } else {
+      return thunkAPI.rejectWithValue(data.error);
+    }
+  }
+);
+
 export const adminSlice = createSlice({
   name: "admin",
   initialState,
@@ -104,7 +122,15 @@ export const adminSlice = createSlice({
       state.loading = false;
       state.error = undefined;
       state.message = undefined;
-      state.isAdmin = undefined;
+    },
+    resetFullAdminState: (state) => {
+      state.success = false;
+      state.loading = false;
+      state.error = undefined;
+      state.message = undefined;
+      state.isAdmin = false;
+      state.allOrders = [];
+      state.allUsers = [];
     },
   },
   extraReducers: (builder) => {
@@ -179,9 +205,23 @@ export const adminSlice = createSlice({
         state.loading = false;
         state.success = false;
         state.error = action.payload as string;
+      })
+      .addCase(removeUserAdmin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(removeUserAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.message = action.payload.message;
+        state.allUsers = action.payload.allUsers;
+      })
+      .addCase(removeUserAdmin.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload as string;
       });
   },
 });
 
-export const { resetState } = adminSlice.actions;
+export const { resetState, resetFullAdminState } = adminSlice.actions;
 export default adminSlice.reducer;

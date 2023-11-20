@@ -11,18 +11,24 @@ import {
   deleteUserAdmin,
   getAllUsersAdmin,
   makeUserAdmin,
+  removeUserAdmin,
+  resetState,
 } from "@/redux/slices/adminSlice";
+import { successOptions, warningOptions } from "@/utils/alerts";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AllUsers = () => {
   const dispatch: any = useDispatch();
-  const { loading, allUsers }: ICounterState_Admin = useSelector(
+  const router: any = useRouter();
+  const { loading, allUsers, isAdmin }: ICounterState_Admin = useSelector(
     (state: any) => state.admin
   );
   const users: Array<IUser_DB> = allUsers as Array<IUser_DB>;
 
-  const { refreshToken }: ICounterState = useSelector(
+  const { refreshToken, userInfo }: ICounterState = useSelector(
     (state: any) => state.user
   );
 
@@ -38,21 +44,29 @@ const AllUsers = () => {
     adminStatus: boolean;
   }) => {
     const token = refreshToken as string;
-    if (adminStatus === true) alert("ADMIN");
-    else alert("NOT ADMIN");
-    // dispatch(makeUserAdmin({ id, refreshToken: token }));
+    if (adminStatus) {
+      dispatch(resetState());
+      dispatch(removeUserAdmin({ id, refreshToken: token }));
+      !loading && toast.warning("Removed From Admin Access", warningOptions);
+    } else {
+      dispatch(resetState());
+      dispatch(makeUserAdmin({ id, refreshToken: token }));
+      !loading && toast.success("Added Admin Access", successOptions);
+    }
   };
 
   useEffect(() => {
     dispatch(getAllUsersAdmin(refreshToken!));
-  }, [dispatch, refreshToken]);
+    !isAdmin && router.push("/login");
+  }, [dispatch, refreshToken, isAdmin, router]);
+
   return (
     <>
       <div className="container table-responsive mt-4">
         {loading && <TriangleLoader />}
         {users.length === 0 ? (
           <p className="text-center" style={{ margin: "7%" }}>
-            <strong>Your Cart is Empty</strong>
+            <strong>No Users Found</strong>
           </p>
         ) : (
           <table className="table mt-3" style={{ marginBottom: "10%" }}>
@@ -77,6 +91,7 @@ const AllUsers = () => {
                   user={user}
                   deleteUserHandler={deleteUserHandler}
                   userAdminHandler={userAdminHandler}
+                  isSuperAdmin={(userInfo as IUser_DB).isSuperAdmin}
                 />
               ))}
             </tbody>
