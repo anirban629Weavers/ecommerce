@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const PopularProductSection = () => {
@@ -24,7 +25,7 @@ const PopularProductSection = () => {
                   odio
                 </p>
                 <p>
-                  <a href="#">Read More</a>
+                  <Link href="/">Read More</Link>
                 </p>
               </div>
             </div>
@@ -48,7 +49,7 @@ const PopularProductSection = () => {
                   odio
                 </p>
                 <p>
-                  <a href="#">Read More</a>
+                  <Link href="/">Read More</Link>
                 </p>
               </div>
             </div>
@@ -72,7 +73,7 @@ const PopularProductSection = () => {
                   odio
                 </p>
                 <p>
-                  <a href="#">Read More</a>
+                  <Link href="/">Read More</Link>
                 </p>
               </div>
             </div>

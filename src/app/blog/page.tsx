@@ -2,6 +2,7 @@
 import { SubHeader } from "@/helpers";
 import { successOptions } from "@/utils/alerts";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -15,7 +16,7 @@ const Blog = () => {
           <div className="row">
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-1.jpg"
                     alt="Image"
@@ -23,17 +24,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">First Time Home Owner Ideas</a>
+                    <Link href="#">First Time Home Owner Ideas</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Kristin Watson</a>
+                      by <Link href="#">Kristin Watson</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 19, 2021</a>
+                      on <Link href="#">Dec 19, 2021</Link>
                     </span>
                   </div>
                 </div>
@@ -42,7 +43,7 @@ const Blog = () => {
 
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-2.jpg"
                     alt="Image"
@@ -50,17 +51,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">How To Keep Your Furniture Clean</a>
+                    <Link href="#">How To Keep Your Furniture Clean</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Robert Fox</a>
+                      by <Link href="#">Robert Fox</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 15, 2021</a>
+                      on <Link href="#">Dec 15, 2021</Link>
                     </span>
                   </div>
                 </div>
@@ -69,7 +70,7 @@ const Blog = () => {
 
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-3.jpg"
                     alt="Image"
@@ -77,17 +78,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">Small Space Furniture Apartment Ideas</a>
+                    <Link href="#">Small Space Furniture Apartment Ideas</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Kristin Watson</a>
+                      by <Link href="#">Kristin Watson</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 12, 2021</a>
+                      on <Link href="#">Dec 12, 2021</Link>
                     </span>
                   </div>
                 </div>
@@ -96,7 +97,7 @@ const Blog = () => {
 
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-1.jpg"
                     alt="Image"
@@ -104,17 +105,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">First Time Home Owner Ideas</a>
+                    <Link href="#">First Time Home Owner Ideas</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Kristin Watson</a>
+                      by <Link href="#">Kristin Watson</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 19, 2021</a>
+                      on <Link href="#">Dec 19, 2021</Link>
                     </span>
                   </div>
                 </div>
@@ -123,7 +124,7 @@ const Blog = () => {
 
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-2.jpg"
                     alt="Image"
@@ -131,17 +132,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">How To Keep Your Furniture Clean</a>
+                    <Link href="#">How To Keep Your Furniture Clean</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Robert Fox</a>
+                      by <Link href="#">Robert Fox</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 15, 2021</a>
+                      on <Link href="#">Dec 15, 2021</Link>
                     </span>
                   </div>
                 </div>
@@ -150,7 +151,7 @@ const Blog = () => {
 
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-3.jpg"
                     alt="Image"
@@ -158,17 +159,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">Small Space Furniture Apartment Ideas</a>
+                    <Link href="#">Small Space Furniture Apartment Ideas</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Kristin Watson</a>
+                      by <Link href="#">Kristin Watson</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 12, 2021</a>
+                      on <Link href="#">Dec 12, 2021</Link>
                     </span>
                   </div>
                 </div>
@@ -177,7 +178,7 @@ const Blog = () => {
 
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-1.jpg"
                     alt="Image"
@@ -185,17 +186,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">First Time Home Owner Ideas</a>
+                    <Link href="#">First Time Home Owner Ideas</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Kristin Watson</a>
+                      by <Link href="#">Kristin Watson</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 19, 2021</a>
+                      on <Link href="#">Dec 19, 2021</Link>
                     </span>
                   </div>
                 </div>
@@ -204,7 +205,7 @@ const Blog = () => {
 
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-2.jpg"
                     alt="Image"
@@ -212,17 +213,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">How To Keep Your Furniture Clean</a>
+                    <Link href="#">How To Keep Your Furniture Clean</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Robert Fox</a>
+                      by <Link href="#">Robert Fox</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 15, 2021</a>
+                      on <Link href="#">Dec 15, 2021</Link>
                     </span>
                   </div>
                 </div>
@@ -231,7 +232,7 @@ const Blog = () => {
 
             <div className="col-12 col-sm-6 col-md-4 mb-5">
               <div className="post-entry">
-                <a href="#" className="post-thumbnail">
+                <Link href="#" className="post-thumbnail">
                   <Image
                     src="/images/post-3.jpg"
                     alt="Image"
@@ -239,17 +240,17 @@ const Blog = () => {
                     width={1000}
                     height={1000}
                   />
-                </a>
+                </Link>
                 <div className="post-content-entry">
                   <h3>
-                    <a href="#">Small Space Furniture Apartment Ideas</a>
+                    <Link href="#">Small Space Furniture Apartment Ideas</Link>
                   </h3>
                   <div className="meta">
                     <span>
-                      by <a href="#">Kristin Watson</a>
+                      by <Link href="#">Kristin Watson</Link>
                     </span>{" "}
                     <span>
-                      on <a href="#">Dec 12, 2021</a>
+                      on <Link href="#">Dec 12, 2021</Link>
                     </span>
                   </div>
                 </div>

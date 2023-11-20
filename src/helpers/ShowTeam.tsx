@@ -1,5 +1,6 @@
 import { ITeam_CLIENT } from "@/interfaces/team.interface";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const ShowTeam = ({ teamMember }: { teamMember: ITeam_CLIENT }) => {
@@ -15,16 +16,16 @@ const ShowTeam = ({ teamMember }: { teamMember: ITeam_CLIENT }) => {
       />
 
       <h3>
-        <a href="#">
+        <Link href="/">
           <span className="">{name}</span>
-        </a>
+        </Link>
       </h3>
       <span className="d-block position mb-4">{position}</span>
       <p>{description} </p>
       {/* <p className="mb-0">
-        <a href="#" className="more dark">
+        <Link href="#" className="more dark">
           Learn More <span className="icon-arrow_forward"></span>
-        </a>
+        </Link>
       </p> */}
     </div>
   );

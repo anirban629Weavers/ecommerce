@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const ServiceSection = () => {
@@ -15,14 +16,14 @@ const ServiceSection = () => {
               velit. Aliquam vulputate velit imperdiet dolor tempor tristique.{" "}
             </p>
             <p>
-              <a href="#" className="btn">
+              <link href="/" className="btn">
                 Explore
-              </a>
+              </link>
             </p>
           </div>
 
           <div className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-            <a className="product-item" href="#">
+            <Link className="product-item" href="/">
               <Image
                 src="/images/product-1.png"
                 className="img-fluid product-thumbnail"
@@ -42,11 +43,11 @@ const ServiceSection = () => {
                   height={20}
                 />
               </span>
-            </a>
+            </Link>
           </div>
 
           <div className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-            <a className="product-item" href="#">
+            <Link className="product-item" href="/">
               <Image
                 src="/images/product-2.png"
                 className="img-fluid product-thumbnail"
@@ -66,10 +67,10 @@ const ServiceSection = () => {
                   height={20}
                 />
               </span>
-            </a>
+            </Link>
           </div>
           <div className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-            <a className="product-item" href="#">
+            <Link className="product-item" href="/">
               <Image
                 src="/images/product-3.png"
                 className="img-fluid product-thumbnail"
@@ -89,7 +90,7 @@ const ServiceSection = () => {
                   height={20}
                 />
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { BrandHeading } from "@/helpers";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -71,24 +72,24 @@ const Footer = () => {
 
             <ul className="list-unstyled custom-social">
               <li>
-                <a href="/">
+                <Link href="/">
                   <span className="fa fa-brands fa-facebook-f"></span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/">
+                <Link href="/">
                   <span className="fa fa-brands fa-twitter"></span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/">
+                <Link href="/">
                   <span className="fa fa-brands fa-instagram"></span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/">
+                <Link href="/">
                   <span className="fa fa-brands fa-linkedin"></span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -98,30 +99,16 @@ const Footer = () => {
               <div className="col-6 col-sm-6 col-md-3">
                 <ul className="list-unstyled">
                   <li>
-                    <a href="/">About us</a>
+                    <Link href="/">About us</Link>
                   </li>
                   <li>
-                    <a href="/">Services</a>
+                    <Link href="/">Services</Link>
                   </li>
                   <li>
-                    <a href="/">Blog</a>
+                    <Link href="/">Blog</Link>
                   </li>
                   <li>
-                    <a href="/">Contact us</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-6 col-sm-6 col-md-3">
-                <ul className="list-unstyled">
-                  <li>
-                    <a href="/">Support</a>
-                  </li>
-                  <li>
-                    <a href="/">Knowledge base</a>
-                  </li>
-                  <li>
-                    <a href="/">Live chat</a>
+                    <Link href="/">Contact us</Link>
                   </li>
                 </ul>
               </div>
@@ -129,16 +116,13 @@ const Footer = () => {
               <div className="col-6 col-sm-6 col-md-3">
                 <ul className="list-unstyled">
                   <li>
-                    <a href="/">Jobs</a>
+                    <Link href="/">Support</Link>
                   </li>
                   <li>
-                    <a href="/">Our team</a>
+                    <Link href="/">Knowledge base</Link>
                   </li>
                   <li>
-                    <a href="/">Leadership</a>
-                  </li>
-                  <li>
-                    <a href="/">Privacy Policy</a>
+                    <Link href="/">Live chat</Link>
                   </li>
                 </ul>
               </div>
@@ -146,13 +130,30 @@ const Footer = () => {
               <div className="col-6 col-sm-6 col-md-3">
                 <ul className="list-unstyled">
                   <li>
-                    <a href="/">Nordic Chair</a>
+                    <Link href="/">Jobs</Link>
                   </li>
                   <li>
-                    <a href="/">Kruzo Aero</a>
+                    <Link href="/">Our team</Link>
                   </li>
                   <li>
-                    <a href="/">Ergonomic Chair</a>
+                    <Link href="/">Leadership</Link>
+                  </li>
+                  <li>
+                    <Link href="/">Privacy Policy</Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="col-6 col-sm-6 col-md-3">
+                <ul className="list-unstyled">
+                  <li>
+                    <Link href="/">Nordic Chair</Link>
+                  </li>
+                  <li>
+                    <Link href="/">Kruzo Aero</Link>
+                  </li>
+                  <li>
+                    <Link href="/">Ergonomic Chair</Link>
                   </li>
                 </ul>
               </div>
@@ -164,18 +165,18 @@ const Footer = () => {
                 <p className="mb-2 text-center text-lg-start">
                   Copyright &copy {new Date().getFullYear()}; All Rights
                   Reserved. &mdash; Designed with love by
-                  <a href="https://untree.co">Untree.co</a> Distributed By
-                  <a href="https://themewagon.com">ThemeWagon</a>
+                  <Link href="https://untree.co">Untree.co</Link> Distributed By
+                  <Link href="https://themewagon.com">ThemeWagon</Link>
                 </p>
               </div>
 
               <div className="col-lg-6 text-center text-lg-end">
                 <ul className="list-unstyled d-inline-flex ms-auto">
                   <li className="me-4">
-                    <a href="#">Terms &amp; Conditions</a>
+                    <Link href="#">Terms &amp; Conditions</Link>
                   </li>
                   <li>
-                    <a href="#">Privacy Policy</a>
+                    <Link href="#">Privacy Policy</Link>
                   </li>
                 </ul>
               </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const HelpSection = () => {
@@ -37,9 +38,9 @@ const HelpSection = () => {
               <li>Donec vitae odio quis nisl dapibus malesuada</li>
             </ul>
             <p>
-              <a href="#" className="btn">
+              <Link href="/" className="btn">
                 Explore
-              </a>
+              </Link>
             </p>
           </div>
         </div>

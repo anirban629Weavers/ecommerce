@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const HeroSection = () => {
@@ -17,12 +18,12 @@ const HeroSection = () => {
                 velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
               </p>
               <p>
-                <a href="" className="btn btn-secondary me-2">
+                <Link href="/" className="btn btn-secondary me-2">
                   Shop Now
-                </a>
-                <a href="#" className="btn btn-white-outline">
+                </Link>
+                <Link href="/" className="btn btn-white-outline">
                   Explore
-                </a>
+                </Link>
               </p>
             </div>
           </div>
