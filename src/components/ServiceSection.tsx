@@ -16,9 +16,9 @@ const ServiceSection = () => {
               velit. Aliquam vulputate velit imperdiet dolor tempor tristique.{" "}
             </p>
             <p>
-              <link href="/" className="btn">
+              <Link href="/" className="btn">
                 Explore
-              </link>
+              </Link>
             </p>
           </div>
 

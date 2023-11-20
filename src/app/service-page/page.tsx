@@ -6,7 +6,7 @@ import {
 import { SubHeader } from "@/helpers";
 import React from "react";
 
-const Service = () => {
+const ServicePage = () => {
   return (
     <>
       <SubHeader headerName="Services" />
@@ -17,4 +17,4 @@ const Service = () => {
   );
 };
 
-export default Service;
+export default ServicePage;
