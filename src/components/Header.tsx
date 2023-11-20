@@ -65,7 +65,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className={pathname === "service" ? "nav-item active" : ""}>
-                <Link className="nav-link" href="/service">
+                <Link className="nav-link" href="/service-page">
                   Services
                 </Link>
               </li>
