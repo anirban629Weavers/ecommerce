@@ -1,6 +1,6 @@
-import { ITeam_FRONTEND } from "@/interfaces/team.interface";
+import { ITeam_CLIENT } from "@/interfaces/team.interface";
 
-export const teamData: Array<ITeam_FRONTEND> = [
+export const teamData: Array<ITeam_CLIENT> = [
   {
     id: "1",
     imageLink: "/images/person_1.jpg",
