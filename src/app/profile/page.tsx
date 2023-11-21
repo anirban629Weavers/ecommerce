@@ -17,17 +17,29 @@ const UserProfile = () => {
   const dispatch: any = useDispatch();
   const router = useRouter();
 
-  const { userInfo, success, error, message, loading }: ICounterState =
-    useSelector((state: any) => state.user);
+  const {
+    userInfo,
+    success,
+    error,
+    message,
+    loading,
+    refreshToken,
+  }: ICounterState = useSelector((state: any) => state.user);
 
   const user: IUser_DB = userInfo as IUser_DB;
 
   const profileInitialValues = {
-    firstname: user.firstname,
-    lastname: user.lastname,
-    phone: user.phone,
-    birthday: user.birthday,
+    firstname: "",
+    lastname: "",
+    phone: "",
+    birthday: "",
   };
+  if (user) {
+    profileInitialValues.firstname = user.firstname;
+    profileInitialValues.lastname = user.lastname;
+    profileInitialValues.phone = user.phone;
+    profileInitialValues.birthday = user.birthday;
+  }
 
   const profileUpdateHandler = (values: object) => {
     if (values === profileInitialValues)
@@ -47,14 +59,15 @@ const UserProfile = () => {
       dispatch(resetState());
     }
     if (error) toast.error(error, errorOptions);
-  }, [dispatch, error, message, success, router]);
+    if (!userInfo) router.push("/");
+  }, [dispatch, error, message, success, router, userInfo]);
 
   return (
     <>
       {loading && <TriangleLoader />}
       <div className="container mt-5 col-md-4">
         <h1 className="mb-5">
-          Edit Profile <h5>{user.email}</h5>
+          Edit Profile {userInfo && <h5>{(userInfo as IUser_DB).email}</h5>}
         </h1>
         <Formik
           initialValues={profileInitialValues}
