@@ -23,6 +23,11 @@ export const FETCH_ALL_USERS = "/api/auth/admin/all-users";
 export const DELETE_USER = "/api/auth/admin/delete-user";
 export const MAKE_ADMIN = "/api/auth/admin/make-admin";
 export const REMOVE_ADMIN = "/api/auth/admin/remove-admin";
+export const MAKE_ORDER_PAID = "/api/auth/admin/make-order-paid";
+export const MAKE_ORDER_UNPAID = "/api/auth/admin/make-order-unpaid";
+export const MAKE_ORDER_DELIVERED = "/api/auth/admin/make-order-delivered";
+export const MAKE_ORDER_NOT_DELIVERED =
+  "/api/auth/admin/make-order-notdelivered";
 
 // USER URLS
 export const UPDATE_USER_URL = "/api/user/update";

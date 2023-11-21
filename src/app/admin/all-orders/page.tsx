@@ -6,7 +6,13 @@ import {
   ICounterState,
   ICounterState_Admin,
 } from "@/interfaces/redux.interface";
-import { getAllOrdersAdmin } from "@/redux/slices/adminSlice";
+import {
+  getAllOrdersAdmin,
+  makeOrderDelivered,
+  makeOrderNotDelivered,
+  makeOrderPaid,
+  makeOrderUnpaid,
+} from "@/redux/slices/adminSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,6 +30,49 @@ const AllOrders = () => {
   useEffect(() => {
     dispatch(getAllOrdersAdmin(refreshToken!));
   }, [dispatch, refreshToken]);
+
+  const OrderHandler = ({
+    paid = false,
+    unpaid = false,
+    delivered = false,
+    notDelivered = false,
+    order_id,
+  }: {
+    paid?: boolean;
+    unpaid?: boolean;
+    delivered?: boolean;
+    notDelivered?: boolean;
+    order_id: string;
+  }) => {
+    paid &&
+      dispatch(
+        makeOrderPaid({
+          id: order_id,
+          refreshToken: refreshToken as string,
+        })
+      );
+    unpaid &&
+      dispatch(
+        makeOrderUnpaid({
+          id: order_id,
+          refreshToken: refreshToken as string,
+        })
+      );
+    delivered &&
+      dispatch(
+        makeOrderDelivered({
+          id: order_id,
+          refreshToken: refreshToken as string,
+        })
+      );
+    notDelivered &&
+      dispatch(
+        makeOrderNotDelivered({
+          id: order_id,
+          refreshToken: refreshToken as string,
+        })
+      );
+  };
 
   return (
     <div className="container table-responsive mt-4">
@@ -50,7 +99,12 @@ const AllOrders = () => {
           </thead>
           <tbody>
             {allOrders?.map((order, index) => (
-              <ShowOrderRow key={index} index={index} order={order} />
+              <ShowOrderRow
+                key={index}
+                index={index}
+                order={order}
+                orderHandler={OrderHandler}
+              />
             ))}
           </tbody>
         </table>
