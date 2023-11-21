@@ -31,3 +31,6 @@ export const MAKE_ORDER_NOT_DELIVERED =
 
 // USER URLS
 export const UPDATE_USER_URL = "/api/user/update";
+
+// PAYMENT URLS
+export const PAYMENT_URL = "/api/payment";

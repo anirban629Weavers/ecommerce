@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { warningOptions } from "./utils/alerts";
 
 export function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
