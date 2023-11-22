@@ -28,6 +28,7 @@ export const MAKE_ORDER_UNPAID = "/api/auth/admin/make-order-unpaid";
 export const MAKE_ORDER_DELIVERED = "/api/auth/admin/make-order-delivered";
 export const MAKE_ORDER_NOT_DELIVERED =
   "/api/auth/admin/make-order-notdelivered";
+export const SINGLE_ORDER_ADMIN = "/api/auth/admin/single-order";
 
 // USER URLS
 export const UPDATE_USER_URL = "/api/user/update";

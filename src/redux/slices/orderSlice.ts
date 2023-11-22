@@ -1,4 +1,9 @@
-import { ALL_ORDERS, CREATE_ORDER, SINGLE_ORDER } from "@/configs/url.config";
+import {
+  ALL_ORDERS,
+  CREATE_ORDER,
+  SINGLE_ORDER,
+  SINGLE_ORDER_ADMIN,
+} from "@/configs/url.config";
 import { IOrderData } from "@/interfaces/order.interface";
 import { ICounterState_Order } from "@/interfaces/redux.interface";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -55,7 +60,6 @@ export const getAllOrders = createAsyncThunk(
 export const getSingleOrder = createAsyncThunk(
   "order/single-order",
   async (U_OID: singleOrderParameter, thunkAPI) => {
-    console.log(U_OID);
     const { data } = await axios.get(
       `${SINGLE_ORDER}?uid=${U_OID.uid}&oid=${U_OID.oid}`,
       {
@@ -64,6 +68,23 @@ export const getSingleOrder = createAsyncThunk(
         },
       }
     );
+
+    console.log(data);
+    if (data.success) {
+      return data;
+    } else {
+      return thunkAPI.rejectWithValue(data.error);
+    }
+  }
+);
+export const getSingleOrderAdmin = createAsyncThunk(
+  "order/single-order-admin",
+  async (id: string, thunkAPI) => {
+    const { data } = await axios.get(`${SINGLE_ORDER_ADMIN}?oid=${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     console.log(data);
     if (data.success) {
@@ -128,6 +149,20 @@ export const orderSlice = createSlice({
         state.currentOrder = action.payload.currentOrder;
       })
       .addCase(getSingleOrder.rejected, (state, action) => {
+        state.loading = false;
+        state.success = false;
+        state.error = action.payload as string;
+      })
+      .addCase(getSingleOrderAdmin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getSingleOrderAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.message = undefined;
+        state.currentOrder = action.payload.currentOrder;
+      })
+      .addCase(getSingleOrderAdmin.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.error = action.payload as string;
