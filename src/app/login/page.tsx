@@ -33,6 +33,7 @@ const Login = () => {
   };
 
   useEffect(() => {
+    userInfo && router.push("/");
     error && toast.error(error, errorOptions) && dispatch(resetState());
     success &&
       userInfo &&
