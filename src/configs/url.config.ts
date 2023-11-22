@@ -35,3 +35,6 @@ export const UPDATE_USER_URL = "/api/user/update";
 
 // PAYMENT URLS
 export const PAYMENT_URL = "/api/payment";
+
+// Static Build
+export const STATIC_ID_ORDERS = "/api/static-id/orders";
