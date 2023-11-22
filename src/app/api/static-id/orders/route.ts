@@ -8,7 +8,7 @@ export const GET = async function (req: NextRequest) {
     await connectDB();
     const orders: Array<IOrderData_DB> = await Order.find({});
     const orderIds = orders.map((order) => order._id as string);
-
+    console.log(orderIds);
     if (orders.length > 0) {
       return NextResponse.json(
         { success: true, message: "success", orderIds },
