@@ -33,7 +33,7 @@ const OrderRow = ({
       <td>{orderItem.orderItems.length}</td>
       <td>
         <Link
-          href={`/invoice/${orderItem._id}`}
+          href={`/invoice?invoice-id=${orderItem._id}`}
           className="text-decoration-none "
         >
           Invoice
