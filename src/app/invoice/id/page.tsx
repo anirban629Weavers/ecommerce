@@ -1,13 +1,13 @@
-"use client";
+'use client'
 import React from "react";
 import InvoiceComponent from "@/components/InvoiceComponent";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
-const SingleInvoice = ({ params }: { params: { id: string } }) => {
-  // const searchParams = useSearchParams();
-  // const id = searchParams.get("invoice-id");
-  return <InvoiceComponent id={params.id} />;
+const SingleInvoice = () => {
+  const searchParams = useSearchParams()
+  const id = searchParams.get('invoice-id');
+  return <InvoiceComponent id={id as string} />;
 };
 
 // export async function generateStaticParams() {
